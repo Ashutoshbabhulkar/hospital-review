@@ -12,7 +12,6 @@
 
 :root{
     --green:#1B4D3E;
-    --light-blue:#A7D8F0;
     --red:#E63946;
 }
 
@@ -64,35 +63,29 @@ h1{
     padding:15px;
 }
 
-.option input{
-    margin-right:10px;
-}
-
 .generate-btn{
     width:100%;
     margin-top:25px;
     background:var(--green);
     color:white;
-    padding:15px;
     border:none;
+    padding:15px;
     border-radius:12px;
-    font-size:16px;
     cursor:pointer;
 }
 
 .review-box{
-    margin-top:25px;
     display:none;
+    margin-top:25px;
 }
 
 textarea{
     width:100%;
     min-height:220px;
     padding:15px;
-    border-radius:12px;
     border:1px solid #ddd;
+    border-radius:12px;
     font-family:inherit;
-    font-size:15px;
 }
 
 .submit-btn{
@@ -100,15 +93,18 @@ textarea{
     margin-top:15px;
     background:var(--red);
     color:white;
-    padding:15px;
     border:none;
+    padding:15px;
     border-radius:12px;
-    font-size:16px;
     cursor:pointer;
 }
 
-.submit-btn:hover{
-    opacity:.9;
+.copy-message{
+    display:none;
+    text-align:center;
+    margin-top:15px;
+    color:var(--green);
+    font-weight:600;
 }
 
 @media(max-width:700px){
@@ -135,65 +131,18 @@ What did you like most about AAS Hospital?
 
 <div class="options">
 
-<label class="option">
-<input type="checkbox" value="Best Doctor in Wardha">
-Best Doctor in Wardha
-</label>
-
-<label class="option">
-<input type="checkbox" value="Best Surgeon in Wardha">
-Best Surgeon in Wardha
-</label>
-
-<label class="option">
-<input type="checkbox" value="Best Pathology Lab in Wardha">
-Best Pathology Lab in Wardha
-</label>
-
-<label class="option">
-<input type="checkbox" value="Excellent Staff">
-Excellent Staff
-</label>
-
-<label class="option">
-<input type="checkbox" value="Fast Reports">
-Fast Reports
-</label>
-
-<label class="option">
-<input type="checkbox" value="Clean Hospital">
-Clean Hospital
-</label>
-
-<label class="option">
-<input type="checkbox" value="Emergency Care">
-Emergency Care
-</label>
-
-<label class="option">
-<input type="checkbox" value="Affordable Treatment">
-Affordable Treatment
-</label>
-
-<label class="option">
-<input type="checkbox" value="Friendly Doctors">
-Friendly Doctors
-</label>
-
-<label class="option">
-<input type="checkbox" value="Modern Facilities">
-Modern Facilities
-</label>
-
-<label class="option">
-<input type="checkbox" value="Accurate Diagnosis">
-Accurate Diagnosis
-</label>
-
-<label class="option">
-<input type="checkbox" value="Patient-Centered Care">
-Patient-Centered Care
-</label>
+<label class="option"><input type="checkbox" value="Best Doctor in Wardha"> Best Doctor in Wardha</label>
+<label class="option"><input type="checkbox" value="Best Surgeon in Wardha"> Best Surgeon in Wardha</label>
+<label class="option"><input type="checkbox" value="Best Pathology Lab in Wardha"> Best Pathology Lab in Wardha</label>
+<label class="option"><input type="checkbox" value="Excellent Staff"> Excellent Staff</label>
+<label class="option"><input type="checkbox" value="Fast Reports"> Fast Reports</label>
+<label class="option"><input type="checkbox" value="Clean Hospital"> Clean Hospital</label>
+<label class="option"><input type="checkbox" value="Emergency Care"> Emergency Care</label>
+<label class="option"><input type="checkbox" value="Affordable Treatment"> Affordable Treatment</label>
+<label class="option"><input type="checkbox" value="Friendly Doctors"> Friendly Doctors</label>
+<label class="option"><input type="checkbox" value="Modern Facilities"> Modern Facilities</label>
+<label class="option"><input type="checkbox" value="Accurate Diagnosis"> Accurate Diagnosis</label>
+<label class="option"><input type="checkbox" value="Patient-Centered Care"> Patient-Centered Care</label>
 
 </div>
 
@@ -208,10 +157,12 @@ Generate My Review
 <button
 class="submit-btn"
 onclick="submitGoogleReview()">
-
 Submit Google Review
-
 </button>
+
+<p id="copyMessage" class="copy-message">
+Opening Google Review page...
+</p>
 
 </div>
 
@@ -230,112 +181,77 @@ function generateReview(){
 
     selectedOptions = [];
 
-    document
-    .querySelectorAll('input[type="checkbox"]:checked')
-    .forEach(item=>{
+    document.querySelectorAll(
+    'input[type="checkbox"]:checked'
+    ).forEach(item=>{
         selectedOptions.push(item.value);
     });
 
-    if(selectedOptions.length === 0){
+    if(selectedOptions.length < 2){
 
-        alert("Please select at least one option.");
+        alert("Please select at least 2 options.");
 
         return;
     }
 
-    let review = "";
-
-    const hasDoctor =
-    selectedOptions.includes("Best Doctor in Wardha");
-
-    const hasSurgeon =
-    selectedOptions.includes("Best Surgeon in Wardha");
-
-    const hasPathology =
-    selectedOptions.includes("Best Pathology Lab in Wardha");
-
-    const hasStaff =
-    selectedOptions.includes("Excellent Staff");
-
-    const hasReports =
-    selectedOptions.includes("Fast Reports");
-
-    const hasClean =
-    selectedOptions.includes("Clean Hospital");
-
-    const hasEmergency =
-    selectedOptions.includes("Emergency Care");
-
-    const hasAffordable =
-    selectedOptions.includes("Affordable Treatment");
-
-    const hasFriendly =
-    selectedOptions.includes("Friendly Doctors");
-
-    const hasModern =
-    selectedOptions.includes("Modern Facilities");
-
-    const hasDiagnosis =
-    selectedOptions.includes("Accurate Diagnosis");
-
-    const hasPatientCare =
-    selectedOptions.includes("Patient-Centered Care");
-
-    review =
+    let review =
     "I had an excellent experience at AAS Hospital & Pathology. ";
 
-    if(hasDoctor || hasFriendly){
+    if(selectedOptions.includes("Best Doctor in Wardha") ||
+       selectedOptions.includes("Friendly Doctors")){
 
         review +=
-        "The doctors were highly knowledgeable, approachable and took the time to explain everything clearly. ";
+        "The doctors were knowledgeable, caring and took the time to explain everything clearly. ";
     }
 
-    if(hasSurgeon){
+    if(selectedOptions.includes("Best Surgeon in Wardha")){
 
         review +=
-        "The surgical team was professional, skilled and gave me complete confidence throughout my treatment. ";
+        "The surgical team was highly skilled, professional and reassuring throughout the treatment process. ";
     }
 
-    if(hasPathology || hasReports || hasDiagnosis){
+    if(selectedOptions.includes("Best Pathology Lab in Wardha") ||
+       selectedOptions.includes("Fast Reports") ||
+       selectedOptions.includes("Accurate Diagnosis")){
 
         review +=
         "The pathology services were accurate, reliable and reports were delivered promptly. ";
     }
 
-    if(hasStaff){
+    if(selectedOptions.includes("Excellent Staff")){
 
         review +=
         "The staff was courteous, supportive and always willing to help. ";
     }
 
-    if(hasClean){
+    if(selectedOptions.includes("Clean Hospital")){
 
         review +=
         "The hospital maintained excellent cleanliness and hygiene standards. ";
     }
 
-    if(hasModern){
+    if(selectedOptions.includes("Modern Facilities")){
 
         review +=
-        "The facilities were modern, well-equipped and patient friendly. ";
+        "The facilities were modern, comfortable and well-equipped. ";
     }
 
-    if(hasEmergency){
+    if(selectedOptions.includes("Emergency Care")){
 
         review +=
         "Emergency services were prompt and efficiently managed. ";
     }
 
-    if(hasAffordable){
+    if(selectedOptions.includes("Affordable Treatment")){
 
         review +=
-        "The treatment was affordable while maintaining a high standard of care. ";
+        "The treatment was affordable without compromising quality. ";
     }
 
-    if(hasPatientCare){
+    if(selectedOptions.includes("Patient-Centered Care")){
 
         review +=
-        "I truly appreciated the patient-centered approach and personal attention provided by the medical team. ";
+        "I appreciated the patient-centered approach and personal attention provided by the team. ";
     }
 
     review +=
@@ -351,37 +267,27 @@ async function submitGoogleReview(){
     const review =
     document.getElementById("reviewText").value;
 
-    try{
+    await fetch(SCRIPT_URL,{
+        method:"POST",
+        body:JSON.stringify({
+            rating:"5",
+            selectedOptions:selectedOptions.join(", "),
+            generatedReview:review
+        })
+    });
 
-        await fetch(SCRIPT_URL,{
-            method:"POST",
-            body:JSON.stringify({
-                rating:"5",
-                selectedOptions:selectedOptions.join(", "),
-                generatedReview:review
-            })
-        });
+    await navigator.clipboard.writeText(review);
 
-    }catch(err){
-        console.log(err);
-    }
+    document.getElementById("copyMessage")
+    .style.display="block";
 
-    try{
+    setTimeout(function(){
 
-        await navigator.clipboard.writeText(review);
+        window.open(
+        "https://g.page/r/CZfxbPXREOsgEBM/review",
+        "_blank");
 
-        alert(
-        "Review copied to clipboard. Paste it on the Google review page."
-        );
-
-    }catch(err){
-        console.log(err);
-    }
-
-    window.open(
-    "https://g.page/r/CZfxbPXREOsgEBM/review",
-    "_blank");
-
+    },1000);
 }
 
 </script>
