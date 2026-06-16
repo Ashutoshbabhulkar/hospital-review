@@ -4,79 +4,167 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Feedback - AAS Hospital</title>
+<title>Feedback - AAS Hospital & Pathology</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
     --green:#1B4D3E;
+    --light-blue:#A7D8F0;
+    --red:#E63946;
+    --white:#ffffff;
+    --bg:#f5fafc;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
     font-family:'Poppins',sans-serif;
-    background:#f7fafc;
+    background:linear-gradient(135deg,#f7fbfd,#eef8fd);
+    min-height:100vh;
     padding:20px;
 }
 
 .container{
-    max-width:900px;
+    max-width:1000px;
     margin:auto;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.logo{
+    font-size:48px;
+    font-weight:800;
+    color:var(--green);
+}
+
+.logo span{
+    color:var(--red);
+}
+
+.header h1{
+    color:var(--green);
+    margin-top:10px;
+    font-size:32px;
+}
+
+.header p{
+    color:#666;
+    margin-top:8px;
 }
 
 .card{
     background:white;
-    border-radius:20px;
-    padding:30px;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    border-radius:24px;
+    padding:35px;
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.08);
 }
 
-h1{
-    color:var(--green);
+.card-title{
     text-align:center;
+    color:var(--green);
+    margin-bottom:8px;
 }
 
 .subtitle{
     text-align:center;
     color:#666;
-    margin:15px 0 25px;
+    margin-bottom:30px;
 }
 
 .options{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:15px;
+    margin-bottom:25px;
 }
 
 .option{
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    border:1px solid #dfe7ea;
+    border-radius:14px;
+    padding:16px;
+    background:#fbfdfe;
+
+    transition:.25s;
+    cursor:pointer;
 }
 
-input, textarea{
+.option:hover{
+    border-color:var(--green);
+    transform:translateY(-2px);
+}
+
+.option input{
+    width:18px;
+    height:18px;
+    accent-color:var(--green);
+}
+
+.input-group{
+    margin-bottom:16px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    color:#444;
+    font-weight:500;
+}
+
+input[type="text"],
+input[type="tel"],
+textarea{
     width:100%;
-    padding:12px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    margin-top:15px;
+    border:1px solid #dfe7ea;
+    border-radius:14px;
+    padding:14px;
     font-family:inherit;
+    font-size:15px;
+    transition:.25s;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+textarea:focus{
+    outline:none;
+    border-color:var(--green);
+    box-shadow:0 0 0 4px rgba(27,77,62,.08);
 }
 
 textarea{
-    min-height:120px;
+    min-height:140px;
+    resize:vertical;
 }
 
 button{
     width:100%;
-    margin-top:20px;
+    border:none;
+    border-radius:14px;
+    padding:16px;
     background:var(--green);
     color:white;
-    border:none;
-    padding:15px;
-    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
     cursor:pointer;
+    transition:.25s;
+}
+
+button:hover{
+    transform:translateY(-2px);
 }
 
 .success{
@@ -84,10 +172,44 @@ button{
     text-align:center;
 }
 
-@media(max-width:700px){
+.success-icon{
+    font-size:64px;
+    margin-bottom:15px;
+}
+
+.success h2{
+    color:var(--green);
+    margin-bottom:10px;
+}
+
+.success p{
+    color:#666;
+    line-height:1.7;
+}
+
+.footer-note{
+    text-align:center;
+    margin-top:20px;
+    color:#888;
+    font-size:13px;
+}
+
+@media(max-width:768px){
 
 .options{
     grid-template-columns:1fr;
+}
+
+.card{
+    padding:25px;
+}
+
+.logo{
+    font-size:38px;
+}
+
+.header h1{
+    font-size:26px;
 }
 
 }
@@ -99,34 +221,91 @@ button{
 
 <div class="container">
 
+<div class="header">
+
+<div class="logo">
+आस<span>+</span>
+</div>
+
+<h1>AAS Hospital & Pathology</h1>
+
+<p>Your feedback helps us improve patient care.</p>
+
+</div>
+
 <div class="card" id="feedbackForm">
 
-<h1>Help Us Improve</h1>
+<h2 class="card-title">Help Us Improve</h2>
 
 <p class="subtitle">
-Please tell us what could have been better.
+Please tell us what could have been better during your visit.
 </p>
 
 <div class="options">
 
-<label class="option"><input type="checkbox" value="Waiting Time"> Waiting Time</label>
-<label class="option"><input type="checkbox" value="Staff Behaviour"> Staff Behaviour</label>
-<label class="option"><input type="checkbox" value="Billing Process"> Billing Process</label>
-<label class="option"><input type="checkbox" value="Cleanliness"> Cleanliness</label>
-<label class="option"><input type="checkbox" value="Doctor Availability"> Doctor Availability</label>
-<label class="option"><input type="checkbox" value="Report Delay"> Report Delay</label>
-<label class="option"><input type="checkbox" value="Communication"> Communication</label>
-<label class="option"><input type="checkbox" value="Facilities"> Facilities</label>
-<label class="option"><input type="checkbox" value="Other"> Other</label>
+<label class="option">
+<input type="checkbox" value="Waiting Time">
+<span>Waiting Time</span>
+</label>
+
+<label class="option">
+<input type="checkbox" value="Staff Behaviour">
+<span>Staff Behaviour</span>
+</label>
+
+<label class="option">
+<input type="checkbox" value="Billing Process">
+<span>Billing Process</span>
+</label>
+
+<label class="option">
+<input type="checkbox" value="Cleanliness">
+<span>Cleanliness</span>
+</label>
+
+<label class="option">
+<input type="checkbox" value="Doctor Availability">
+<span>Doctor Availability</span>
+</label>
+
+<label class="option">
+<input type="checkbox" value="Report Delay">
+<span>Report Delay</span>
+</label>
+
+<label class="option">
+<input type="checkbox" value="Communication">
+<span>Communication</span>
+</label>
+
+<label class="option">
+<input type="checkbox" value="Facilities">
+<span>Facilities</span>
+</label>
+
+<label class="option">
+<input type="checkbox" value="Other">
+<span>Other</span>
+</label>
 
 </div>
 
-<input type="text" id="name" placeholder="Name (Optional)">
-<input type="tel" id="phone" placeholder="Phone Number (Optional)">
+<div class="input-group">
+<label>Name (Optional)</label>
+<input type="text" id="name">
+</div>
 
+<div class="input-group">
+<label>Phone Number (Optional)</label>
+<input type="tel" id="phone">
+</div>
+
+<div class="input-group">
+<label>Additional Comments</label>
 <textarea
 id="comments"
-placeholder="Additional comments..."></textarea>
+placeholder="Tell us more about your experience..."></textarea>
+</div>
 
 <button onclick="submitFeedback()">
 Submit Feedback
@@ -136,12 +315,18 @@ Submit Feedback
 
 <div class="card success" id="thankYou">
 
-<h1>Thank You</h1>
+<div class="success-icon">🙏</div>
+
+<h2>Thank You For Your Feedback</h2>
 
 <p>
-Your feedback has been recorded successfully.
+Your feedback has been recorded successfully and will help us improve our services for future patients.
 </p>
 
+</div>
+
+<div class="footer-note">
+AAS Hospital & Pathology • Wardha
 </div>
 
 </div>
