@@ -2,258 +2,257 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aas Hospital & Pathology - Patient Feedback</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aas Hospital & Pathology - Feedback</title>
 <style>
   :root {
-    --english-green: #1B4D3E; /* Deep English Green */
-    --light-blue: #D0E8F2;    /* Soft Light Blue */
-    --hospital-red: #D32F2F;  /* Tasteful Red */
+    --brand-teal: #146D74; /* Exact Dark Teal from logo */
+    --brand-red: #D32F2F;  /* Exact Red from logo */
+    --light-bg: #F0F7F8;
+    --text-dark: #333;
     --white: #FFFFFF;
-    --text-dark: #333333;
   }
 
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--light-blue);
-    color: var(--text-dark);
-    max-width: 650px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
-
-  .container {
-    background: var(--white);
-    padding: 30px 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  }
-
-  .logo-area {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid var(--light-blue);
-  }
-
-  .logo-title {
-    color: var(--english-green);
-    font-size: 28px;
-    font-weight: 800;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--light-bg);
     margin: 0;
-    letter-spacing: 1px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
   }
-  
-  .logo-subtitle {
-    color: var(--hospital-red);
-    font-size: 14px;
-    margin-top: 5px;
-    font-weight: 700;
-    letter-spacing: 2px;
+
+  .main-container {
+    background: var(--white);
+    max-width: 650px;
+    width: 90%;
+    margin: 20px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    text-align: center;
+    border-top: 5px solid var(--brand-teal);
+  }
+
+  /* Logo Styling */
+  .logo-box {
+    margin-bottom: 30px;
+  }
+  .hospital-logo {
+    max-width: 250px;
+    height: auto;
   }
 
   h1 {
-    color: var(--english-green);
-    font-size: 24px;
+    color: var(--brand-teal);
+    font-size: 26px;
     margin-bottom: 5px;
+    font-weight: 700;
   }
 
-  h2 {
-    color: var(--english-green);
-    font-size: 20px;
+  p.subtitle {
+    color: #666;
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 30px;
   }
 
-  /* Star Rating Styles - Modern Hover Effects */
-  .stars {
+  /* Star Rating Styles - Modern & Inviting */
+  .stars-container {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
+    gap: 15px;
+    margin-bottom: 30px;
   }
-
-  .stars input {
+  .stars-container input {
     display: none;
   }
-
-  .stars label {
-    font-size: 45px;
+  .stars-container label {
+    font-size: 50px;
     color: #e0e0e0;
     cursor: pointer;
     transition: color 0.2s;
   }
-
-  .stars label:hover,
-  .stars label:hover ~ label,
-  .stars input:checked ~ label {
-    color: #FFD700; /* Gold */
+  .stars-container label:hover,
+  .stars-container label:hover ~ label,
+  .stars-container input:checked ~ label {
+    color: #FFD700; /* Rich Gold */
   }
 
+  /* Positive Feedback Options Grid */
   .options-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    margin: 25px 0;
     text-align: left;
-    margin-top: 20px;
   }
-
-  @media(max-width: 480px) {
-    .options-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
   .option {
+    background: #fbfbfb;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
-    background: #f8fcfd;
-    border: 1px solid var(--light-blue);
-    padding: 12px;
-    border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
   }
-
   .option:hover {
-    border-color: var(--english-green);
-    background: var(--light-blue);
+    border-color: var(--brand-teal);
+    background: #f0f7f8;
   }
-
   .option input {
-    margin-right: 10px;
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-    accent-color: var(--english-green);
+    margin-right: 12px;
+    accent-color: var(--brand-teal);
+    width: 18px;
+    height: 18px;
   }
 
+  /* Button Styling */
   button {
-    background-color: var(--english-green);
+    background-color: var(--brand-teal);
     color: var(--white);
     border: none;
-    padding: 16px 24px;
-    font-size: 16px;
+    padding: 18px 25px;
+    font-size: 17px;
     border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
-    margin-top: 25px;
+    font-weight: 700;
     width: 100%;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.1s;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
-
   button:hover {
-    background-color: #12352a;
+    background-color: #0f545a;
   }
-
-  button.danger {
-    background-color: var(--hospital-red);
+  button:active {
+    transform: translateY(1px);
   }
-  
-  button.danger:hover {
+  button.submit-neg {
+    background-color: var(--brand-red);
+    margin-top: 20px;
+  }
+  button.submit-neg:hover {
     background-color: #b71c1c;
   }
 
+  /* Textarea Styling */
   textarea {
     width: 100%;
-    height: 130px;
-    margin-top: 15px;
+    height: 140px;
     padding: 15px;
-    border: 2px solid var(--light-blue);
+    margin-top: 15px;
+    border: 2px solid #eee;
     border-radius: 8px;
-    font-size: 15px;
+    font-size: 16px;
     box-sizing: border-box;
     font-family: inherit;
-    resize: vertical;
     transition: border-color 0.3s;
   }
-
   textarea:focus {
     outline: none;
-    border-color: var(--english-green);
+    border-color: var(--brand-teal);
   }
 
+  /* Container Visibility */
   #positive, #negative, #reviewBox {
     display: none;
-    animation: fadeIn 0.5s;
+    animation: fadeIn 0.4s ease-out;
   }
-
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 500px) {
+    .main-container { padding: 25px; }
+    h1 { font-size: 22px; }
+    .stars-container label { font-size: 40px; }
   }
 
 </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- Hospital Logo Header -->
-  <div class="logo-area">
-    <h2 class="logo-title">AAS HOSPITAL</h2>
-    <div class="logo-subtitle">& PATHOLOGY</div>
+<div class="main-container">
+  <!-- Branded Header -->
+  <div class="logo-box">
+    <img src="आस final - Copy (2).png" alt="Aas Hospital & Pathology Logo" class="hospital-logo">
   </div>
 
+  <!-- Initial Rating Section -->
   <div id="ratingSection">
     <h1>How was your experience today?</h1>
-    <p style="color: #666; font-size: 15px;">Tap the stars to rate your visit.</p>
+    <p class="subtitle">Tap the stars to let us know.</p>
     
-    <div class="stars">
+    <div class="stars-container">
       <input type="radio" id="star5" name="rating" value="5" onclick="selectRating(5)">
-      <label for="star5">★</label>
+      <label for="star5" title="Excellent">★</label>
       <input type="radio" id="star4" name="rating" value="4" onclick="selectRating(4)">
-      <label for="star4">★</label>
+      <label for="star4" title="Good">★</label>
       <input type="radio" id="star3" name="rating" value="3" onclick="selectRating(3)">
-      <label for="star3">★</label>
+      <label for="star3" title="Average">★</label>
       <input type="radio" id="star2" name="rating" value="2" onclick="selectRating(2)">
-      <label for="star2">★</label>
+      <label for="star2" title="Poor">★</label>
       <input type="radio" id="star1" name="rating" value="1" onclick="selectRating(1)">
-      <label for="star1">★</label>
+      <label for="star1" title="Very Poor">★</label>
     </div>
   </div>
 
+  <!-- 4/5 Star (Positive) Workflow -->
   <div id="positive">
-    <h2>What did you like the most?</h2>
-    <p style="font-size: 14px; color: #555;">Select all that apply:</p>
+    <h2 style="color: var(--brand-teal);">We are glad you had a good experience!</h2>
+    <p style="margin-bottom: 20px;">What impressed you most? (Select all that apply)</p>
     
-    <!-- SEO Keyword Checkboxes -->
     <div class="options-grid">
-      <label class="option"><input type="checkbox" value="finding the best doctor in Wardha"> Best doctor in Wardha</label>
-      <label class="option"><input type="checkbox" value="the best hospital in Wardha"> Best hospital in Wardha</label>
-      <label class="option"><input type="checkbox" value="consulting the best laparoscopic surgeon"> Best surgeon</label>
-      <label class="option"><input type="checkbox" value="visiting the best pathology lab in Wardha"> Best pathology lab</label>
-      <label class="option"><input type="checkbox" value="highly accurate lab reports"> Accurate lab reports</label>
-      <label class="option"><input type="checkbox" value="excellent and caring staff"> Caring staff</label>
-      <label class="option"><input type="checkbox" value="clean and hygienic facilities"> Clean facilities</label>
-      <label class="option"><input type="checkbox" value="fast and reliable service"> Fast service</label>
+      <!-- SEO Keyword Optimized Checkboxes -->
+      <label class="option"><input type="checkbox" value="finding the best doctor in Wardha"> The best doctor in Wardha</label>
+      <label class="option"><input type="checkbox" value="the best hospital experience in Wardha"> Best hospital in Wardha</label>
+      <label class="option"><input type="checkbox" value="consulting the best surgeon in Wardha"> Best surgeon in Wardha</label>
+      <label class="option"><input type="checkbox" value="visiting the best pathology lab in Wardha"> Best pathology lab in Wardha</label>
+      <label class="option"><input type="checkbox" value="the advanced multi-specialty services"> Multi-specialty care</label>
+      <label class="option"><input type="checkbox" value="the caring and compassionate nursing staff"> Caring staff</label>
+      <label class="option"><input type="checkbox" value="accurate and fast diagnostic lab reports"> Fast & accurate reports</label>
+      <label class="option"><input type="checkbox" value="the clean and hygienic hospital facilities"> Clean facilities</label>
     </div>
 
     <button onclick="generateReview()">Generate My Review</button>
 
     <div id="reviewBox">
-      <h3 style="color: var(--english-green); margin-top: 30px;">Your Review is Ready!</h3>
-      <p style="font-size: 14px; color: #666;">Feel free to edit the text below, then click to copy it directly to Google.</p>
+      <h3 style="color: var(--brand-teal); margin-top: 30px;">Your review is ready!</h3>
+      <p style="font-size: 14px; color: #777;">You can edit the text below, then click to copy it directly to Google.</p>
       
       <textarea id="reviewText"></textarea>
       
-      <button onclick="copyAndOpenGoogle()" style="background-color: var(--hospital-red);">Copy Review & Open Google</button>
+      <!-- Crucial: Replace the URL below -->
+      <button onclick="copyAndOpenGoogle()" style="background-color: var(--brand-red); margin-top: 20px;">
+        Copy Review & Open Google Maps
+      </button>
     </div>
   </div>
 
+  <!-- 1-3 Star (Negative) Workflow - Private Feedback -->
   <div id="negative">
-    <h2>We're sorry to hear that.</h2>
-    <p style="font-size: 14px; color: #555;">Please let us know how we can improve so we can serve you better next time. This feedback goes directly to our management.</p>
+    <h2 style="color: var(--brand-red);">We're sincerely sorry.</h2>
+    <p>We strive for excellence and regret that we missed the mark. Please tell us what went wrong so we can improve immediately. Your feedback is seen only by our management team.</p>
     
-    <textarea id="negativeFeedback" placeholder="Tell us what went wrong..."></textarea>
+    <textarea id="negativeFeedback" placeholder="Tell us how we can make things right..."></textarea>
     
-    <button class="danger" onclick="thankYou()">Submit Feedback Directly to Management</button>
+    <button class="submit-neg" onclick="thankYou()">Submit Feedback Privately</button>
   </div>
 </div>
 
 <script>
+  let currentRating = 0;
+
   function selectRating(rating) {
+    currentRating = rating;
     document.getElementById('ratingSection').style.display = 'none';
 
     // 4 and 5 stars go to Google. 1, 2, and 3 stars get routed internally.
@@ -266,13 +265,15 @@
 
   function generateReview() {
     let selected = [];
+    // Capture the value (SEO keyphrase) of checked inputs
     document.querySelectorAll('input[type=checkbox]:checked').forEach(item => {
       selected.push(item.value);
     });
 
-    let review = "I had an excellent experience at Aas Hospital and Pathology. ";
+    // Branded intro sentence
+    let review = "I had an excellent experience at Aas Hospital & Pathology. ";
     
-    // Logic to naturally string the keywords together with proper commas and 'and'
+    // Logic to naturally string the keyphrases together
     if (selected.length > 0) {
       if (selected.length === 1) {
         review += "I highly recommend them for " + selected[0] + ". ";
@@ -282,36 +283,43 @@
       }
     }
     
-    review += "The team was professional, supportive, and provided top-notch care throughout my visit.";
+    // Branded outro sentence
+    review += "The entire medical team was professional, supportive, and provided top-notch care throughout my visit.";
 
     document.getElementById('reviewText').value = review;
     document.getElementById('reviewBox').style.display = 'block';
     
-    // Smooth scroll down to the text area so the user doesn't miss it
+    // Smooth scroll down to the generated text area
     document.getElementById('reviewBox').scrollIntoView({ behavior: 'smooth' });
   }
 
   function copyAndOpenGoogle() {
     let text = document.getElementById('reviewText').value;
     
+    // Attempt to copy to clipboard (modern browsers)
     navigator.clipboard.writeText(text).then(() => {
-      alert("Review copied to clipboard! Please paste it into our Google Profile.");
-      // REMEMBER TO REPLACE THIS WITH YOUR ACTUAL GOOGLE REVIEW LINK
-      window.open("PASTE_YOUR_GOOGLE_REVIEW_LINK_HERE", "_blank");
+      alert("Review copied! Please paste it into our Google Profile.");
+      
+      // *** ACTION REQUIRED: Paste your actual Google Review link here ***
+      let googleReviewUrl = "https://g.page/r/CZfxbPXREOsgEBM/review"; 
+      
+      window.open(googleReviewUrl, "_blank");
     }).catch(err => {
-      alert("Failed to copy text. Please select the text inside the box and copy it manually.");
+      // Fallback for older browsers
+      alert("Failed to copy text automatically. Please select the text inside the box and copy it manually, then paste it on Google.");
     });
   }
 
   function thankYou() {
     let feedback = document.getElementById('negativeFeedback').value;
     if(feedback.trim() === "") {
-      alert("Please enter some feedback before submitting.");
+      alert("Please enter your feedback before submitting.");
       return;
     }
-    alert("Thank you for your feedback. Our management team will review this immediately to improve our services.");
+    // In a real application, this is where you would send 'feedback' to your backend.
+    alert("Thank you for your honest feedback. Our management team will review this immediately to ensure we improve our services.");
     
-    // Reloads the page to clear the form (In reality, you'd send this to your backend/database first)
+    // Reloads the page to reset the form
     location.reload(); 
   }
 </script>
