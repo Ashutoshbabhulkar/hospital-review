@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Generate Your Review - AAS Hospital</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --green:#1B4D3E;
+    --light-blue:#A7D8F0;
+    --red:#E63946;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f7fafc;
+    padding:20px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+h1{
+    color:var(--green);
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:30px;
+}
+
+.options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.option{
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:15px;
+}
+
+.option input{
+    margin-right:10px;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+}
+
+.generate-btn{
+    width:100%;
+    margin-top:25px;
+    background:var(--green);
+    color:white;
+    padding:15px;
+    border-radius:12px;
+    font-size:16px;
+}
+
+.review-box{
+    margin-top:25px;
+    display:none;
+}
+
+textarea{
+    width:100%;
+    min-height:180px;
+    padding:15px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    font-family:inherit;
+}
+
+.actions{
+    display:flex;
+    gap:15px;
+    margin-top:15px;
+}
+
+.copy-btn{
+    flex:1;
+    background:var(--green);
+    color:white;
+    padding:15px;
+    border-radius:12px;
+}
+
+.google-btn{
+    flex:1;
+    background:var(--red);
+    color:white;
+    padding:15px;
+    border-radius:12px;
+}
+
+@media(max-width:700px){
+
+.options{
+    grid-template-columns:1fr;
+}
+
+.actions{
+    flex-direction:column;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Thank You For Your 5-Star Rating ⭐⭐⭐⭐⭐</h1>
+
+<p class="subtitle">
+What did you like most about AAS Hospital?
+</p>
+
+<div class="options">
+
+<label class="option">
+<input type="checkbox" value="Best Doctor in Wardha">
+Best Doctor in Wardha
+</label>
+
+<label class="option">
+<input type="checkbox" value="Best Surgeon in Wardha">
+Best Surgeon in Wardha
+</label>
+
+<label class="option">
+<input type="checkbox" value="Best Pathology Lab in Wardha">
+Best Pathology Lab in Wardha
+</label>
+
+<label class="option">
+<input type="checkbox" value="Excellent Staff">
+Excellent Staff
+</label>
+
+<label class="option">
+<input type="checkbox" value="Fast Reports">
+Fast Reports
+</label>
+
+<label class="option">
+<input type="checkbox" value="Clean Hospital">
+Clean Hospital
+</label>
+
+<label class="option">
+<input type="checkbox" value="Emergency Care">
+Emergency Care
+</label>
+
+<label class="option">
+<input type="checkbox" value="Affordable Treatment">
+Affordable Treatment
+</label>
+
+<label class="option">
+<input type="checkbox" value="Friendly Doctors">
+Friendly Doctors
+</label>
+
+<label class="option">
+<input type="checkbox" value="Modern Facilities">
+Modern Facilities
+</label>
+
+</div>
+
+<button class="generate-btn" onclick="generateReview()">
+Generate My Review
+</button>
+
+<div class="review-box" id="reviewBox">
+
+<textarea id="reviewText"></textarea>
+
+<div class="actions">
+
+<button class="copy-btn" onclick="copyReview()">
+Copy Review
+</button>
+
+<button class="google-btn" onclick="openGoogleReview()">
+Open Google Review
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbw-pCWG_45x8cWkx8oozGAeazeR7XUrsbS3KBF6SH5gDqxovxMiSpSa5wuFrv0-ZQ4e/exec";
+
+function generateReview(){
+
+    const selected = [];
+
+    document
+        .querySelectorAll('input[type="checkbox"]:checked')
+        .forEach(item=>{
+            selected.push(item.value);
+        });
+
+    if(selected.length===0){
+
+        alert("Please select at least one option.");
+
+        return;
+    }
+
+    let review =
+"AAS Hospital & Pathology provided an excellent experience. ";
+
+    review +=
+"I especially appreciated ";
+
+    review += selected.join(", ");
+
+    review +=
+". The doctors are knowledgeable, the staff is supportive and the overall care was outstanding. Highly recommended.";
+
+    document.getElementById("reviewText").value = review;
+
+    document.getElementById("reviewBox").style.display="block";
+
+    fetch(SCRIPT_URL,{
+        method:"POST",
+        body:JSON.stringify({
+            rating:"5",
+            selectedOptions:selected.join(", "),
+            generatedReview:review
+        })
+    });
+
+}
+
+function copyReview(){
+
+    const review =
+    document.getElementById("reviewText");
+
+    review.select();
+
+    navigator.clipboard.writeText(review.value);
+
+    alert("Review copied to clipboard.");
+}
+
+function openGoogleReview(){
+
+    window.open(
+    "https://g.page/r/CZfxbPXREOsgEBM/review",
+    "_blank");
+
+}
+
+</script>
+
+</body>
+</html>
+```
