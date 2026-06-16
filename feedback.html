@@ -1,376 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Feedback - AAS Hospital & Pathology</title>
+    <title>Feedback - AAS Hospital & Pathology</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-<style>
+    <style>
+        :root {
+            --green: #1B4D3E;
+            --light-blue: #A7D8F0;
+            --red: #E63946;
+            --white: #ffffff;
+            --bg: #f5fafc;
+        }
 
-:root{
-    --green:#1B4D3E;
-    --light-blue:#A7D8F0;
-    --red:#E63946;
-    --white:#ffffff;
-    --bg:#f5fafc;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f7fbfd, #eef8fd);
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-body{
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#f7fbfd,#eef8fd);
-    min-height:100vh;
-    padding:20px;
-}
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
 
-.container{
-    max-width:1000px;
-    margin:auto;
-}
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
 
-.header{
-    text-align:center;
-    margin-bottom:25px;
-}
+        .logo {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--green);
+        }
 
-.logo{
-    font-size:48px;
-    font-weight:800;
-    color:var(--green);
-}
+        .logo span {
+            color: var(--red);
+        }
 
-.logo span{
-    color:var(--red);
-}
+        .header h1 {
+            color: var(--green);
+            margin-top: 10px;
+            font-size: 32px;
+        }
 
-.header h1{
-    color:var(--green);
-    margin-top:10px;
-    font-size:32px;
-}
+        .header p {
+            color: #666;
+            margin-top: 8px;
+        }
 
-.header p{
-    color:#666;
-    margin-top:8px;
-}
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, .08);
+        }
 
-.card{
-    background:white;
-    border-radius:24px;
-    padding:35px;
-    box-shadow:
-    0 10px 30px rgba(0,0,0,.08);
-}
+        .card-title {
+            text-align: center;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
 
-.card-title{
-    text-align:center;
-    color:var(--green);
-    margin-bottom:8px;
-}
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
 
-.subtitle{
-    text-align:center;
-    color:#666;
-    margin-bottom:30px;
-}
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
 
-.options{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-    margin-bottom:25px;
-}
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
 
-.option{
-    display:flex;
-    align-items:center;
-    gap:10px;
+            border: 1px solid #dfe7ea;
+            border-radius: 14px;
+            padding: 16px;
+            background: #fbfdfe;
 
-    border:1px solid #dfe7ea;
-    border-radius:14px;
-    padding:16px;
-    background:#fbfdfe;
+            transition: .25s;
+            cursor: pointer;
+        }
 
-    transition:.25s;
-    cursor:pointer;
-}
+        .option.selected {
 
-.option:hover{
-    border-color:var(--green);
-    transform:translateY(-2px);
-}
+            background:
+                rgba(234, 27, 35, .08);
 
-.option input{
-    width:18px;
-    height:18px;
-    accent-color:var(--green);
-}
+            border-color: #EA1B23;
 
-.input-group{
-    margin-bottom:16px;
-}
+            color: #EA1B23;
 
-.input-group label{
-    display:block;
-    margin-bottom:8px;
-    color:#444;
-    font-weight:500;
-}
+        }
 
-input[type="text"],
-input[type="tel"],
-textarea{
-    width:100%;
-    border:1px solid #dfe7ea;
-    border-radius:14px;
-    padding:14px;
-    font-family:inherit;
-    font-size:15px;
-    transition:.25s;
-}
+        .option:hover {
+            border-color: var(--green);
+            transform: translateY(-2px);
+        }
 
-input[type="text"]:focus,
-input[type="tel"]:focus,
-textarea:focus{
-    outline:none;
-    border-color:var(--green);
-    box-shadow:0 0 0 4px rgba(27,77,62,.08);
-}
+        .option input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--green);
+        }
 
-textarea{
-    min-height:140px;
-    resize:vertical;
-}
+        .input-group {
+            margin-bottom: 16px;
+        }
 
-button{
-    width:100%;
-    border:none;
-    border-radius:14px;
-    padding:16px;
-    background:var(--green);
-    color:white;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.25s;
-}
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #444;
+            font-weight: 500;
+        }
 
-button:hover{
-    transform:translateY(-2px);
-}
+        input[type="text"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            border: 1px solid #dfe7ea;
+            border-radius: 14px;
+            padding: 14px;
+            font-family: inherit;
+            font-size: 15px;
+            transition: .25s;
+        }
 
-.success{
-    display:none;
-    text-align:center;
-}
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 4px rgba(27, 77, 62, .08);
+        }
 
-.success-icon{
-    font-size:64px;
-    margin-bottom:15px;
-}
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
 
-.success h2{
-    color:var(--green);
-    margin-bottom:10px;
-}
+        button {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            background: var(--green);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .25s;
+        }
 
-.success p{
-    color:#666;
-    line-height:1.7;
-}
+        button:hover {
+            transform: translateY(-2px);
+        }
 
-.footer-note{
-    text-align:center;
-    margin-top:20px;
-    color:#888;
-    font-size:13px;
-}
+        .success {
+            display: none;
+            text-align: center;
+        }
 
-@media(max-width:768px){
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
 
-.options{
-    grid-template-columns:1fr;
-}
+        .success h2 {
+            color: var(--green);
+            margin-bottom: 10px;
+        }
 
-.card{
-    padding:25px;
-}
+        .success p {
+            color: #666;
+            line-height: 1.7;
+        }
 
-.logo{
-    font-size:38px;
-}
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+            font-size: 13px;
+        }
 
-.header h1{
-    font-size:26px;
-}
+        @media(max-width:768px) {
 
-}
+            .options {
+                grid-template-columns: 1fr;
+            }
 
-</style>
+            .card {
+                padding: 25px;
+            }
+
+            .logo {
+                font-size: 38px;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-<div class="header">
+        <div class="header">
 
-<div class="logo">
-आस<span>+</span>
-</div>
+            <div class="logo">
+                आस<span>+</span>
+            </div>
 
-<h1>AAS Hospital & Pathology</h1>
+            <h1>AAS Hospital & Pathology</h1>
 
-<p>Your feedback helps us improve patient care.</p>
+            <p>Your feedback helps us improve patient care.</p>
 
-</div>
+        </div>
 
-<div class="card" id="feedbackForm">
+        <div class="card" id="feedbackForm">
 
-<h2 class="card-title">Help Us Improve</h2>
+            <h2 class="card-title">Help Us Improve</h2>
 
-<p class="subtitle">
-Please tell us what could have been better during your visit.
-</p>
+            <p class="subtitle">
+                Please tell us what could have been better during your visit.
+            </p>
 
-<div class="options">
+            <div class="options">
 
-<label class="option">
-<input type="checkbox" value="Waiting Time">
-<span>Waiting Time</span>
-</label>
+                <label class="option">
+                    <input type="checkbox" value="Waiting Time">
+                    <span>Waiting Time</span>
+                </label>
 
-<label class="option">
-<input type="checkbox" value="Staff Behaviour">
-<span>Staff Behaviour</span>
-</label>
+                <label class="option">
+                    <input type="checkbox" value="Staff Behaviour">
+                    <span>Staff Behaviour</span>
+                </label>
 
-<label class="option">
-<input type="checkbox" value="Billing Process">
-<span>Billing Process</span>
-</label>
+                <label class="option">
+                    <input type="checkbox" value="Billing Process">
+                    <span>Billing Process</span>
+                </label>
 
-<label class="option">
-<input type="checkbox" value="Cleanliness">
-<span>Cleanliness</span>
-</label>
+                <label class="option">
+                    <input type="checkbox" value="Cleanliness">
+                    <span>Cleanliness</span>
+                </label>
 
-<label class="option">
-<input type="checkbox" value="Doctor Availability">
-<span>Doctor Availability</span>
-</label>
+                <label class="option">
+                    <input type="checkbox" value="Doctor Availability">
+                    <span>Doctor Availability</span>
+                </label>
 
-<label class="option">
-<input type="checkbox" value="Report Delay">
-<span>Report Delay</span>
-</label>
+                <label class="option">
+                    <input type="checkbox" value="Report Delay">
+                    <span>Report Delay</span>
+                </label>
 
-<label class="option">
-<input type="checkbox" value="Communication">
-<span>Communication</span>
-</label>
+                <label class="option">
+                    <input type="checkbox" value="Communication">
+                    <span>Communication</span>
+                </label>
 
-<label class="option">
-<input type="checkbox" value="Facilities">
-<span>Facilities</span>
-</label>
+                <label class="option">
+                    <input type="checkbox" value="Facilities">
+                    <span>Facilities</span>
+                </label>
 
-<label class="option">
-<input type="checkbox" value="Other">
-<span>Other</span>
-</label>
+                <label class="option">
+                    <input type="checkbox" value="Other">
+                    <span>Other</span>
+                </label>
 
-</div>
+            </div>
 
-<div class="input-group">
-<label>Name (Optional)</label>
-<input type="text" id="name">
-</div>
+            <div class="input-group">
+                <label>Name (Optional)</label>
+                <input type="text" id="name">
+            </div>
 
-<div class="input-group">
-<label>Phone Number (Optional)</label>
-<input type="tel" id="phone">
-</div>
+            <div class="input-group">
+                <label>Phone Number (Optional)</label>
+                <input type="tel" id="phone">
+            </div>
 
-<div class="input-group">
-<label>Additional Comments</label>
-<textarea
-id="comments"
-placeholder="Tell us more about your experience..."></textarea>
-</div>
+            <div class="input-group">
+                <label>Additional Comments</label>
+                <textarea id="comments" placeholder="Tell us more about your experience..."></textarea>
 
-<button onclick="submitFeedback()">
-Submit Feedback
-</button>
+                <div class="followup-section">
 
-</div>
+                    <label class="followup-card">
 
-<div class="card success" id="thankYou">
+                        <input type="checkbox" id="followup">
 
-<div class="success-icon">🙏</div>
+                        <span>
+                            📞 Please contact me to discuss my experience
+                        </span>
 
-<h2>Thank You For Your Feedback</h2>
+                    </label>
 
-<p>
-Your feedback has been recorded successfully and will help us improve our services for future patients.
-</p>
+                </div>
 
-</div>
+            </div>
 
-<div class="footer-note">
-AAS Hospital & Pathology • Wardha
-</div>
+            <button onclick="submitFeedback()">
+                Submit Feedback
+            </button>
 
-</div>
+        </div>
 
-<script>
+        <div class="card success" id="thankYou">
 
-const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbw-pCWG_45x8cWkx8oozGAeazeR7XUrsbS3KBF6SH5gDqxovxMiSpSa5wuFrv0-ZQ4e/exec";
+            <div class="success-icon">🙏</div>
 
-async function submitFeedback(){
+            <h2>❤️ Thank You For Helping Us Improve</h2>
 
-    const issues=[];
+            <p>
+                Your feedback has been safely recorded and will help us improve patient care and service quality.
+                We appreciate the time you took to share your experience.
+            </p>
 
-    document.querySelectorAll(
-    'input[type="checkbox"]:checked'
-    ).forEach(item=>{
-        issues.push(item.value);
-    });
+        </div>
 
-    const response = await fetch(SCRIPT_URL,{
-        method:"POST",
-        body:JSON.stringify({
-            rating:localStorage.getItem("rating"),
-            name:document.getElementById("name").value,
-            phone:document.getElementById("phone").value,
-            issues:issues.join(", "),
-            comments:document.getElementById("comments").value
-        })
-    });
+        <div class="footer-note">
+            AAS Hospital & Pathology • Wardha
+        </div>
 
-    const result = await response.json();
+    </div>
 
-    if(result.success){
+    <script>
 
-        document.getElementById("feedbackForm")
-        .style.display="none";
+        const SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbw-pCWG_45x8cWkx8oozGAeazeR7XUrsbS3KBF6SH5gDqxovxMiSpSa5wuFrv0-ZQ4e/exec";
 
-        document.getElementById("thankYou")
-        .style.display="block";
-    }
+        async function submitFeedback() {
 
-}
+            const issues = [];
 
-</script>
+            document.querySelectorAll(
+                'input[type="checkbox"]:checked'
+            ).forEach(item => {
+                issues.push(item.value);
+            });
+
+            const response = await fetch(SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify({
+                    rating: localStorage.getItem("rating"),
+                    name: document.getElementById("name").value,
+                    phone: document.getElementById("phone").value,
+                    issues: issues.join(", "),
+                    comments: document.getElementById("comments").value,
+                    followup:
+                        document.getElementById("followup").checked
+                            ? "YES"
+                            : "NO"
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+
+                document.getElementById("feedbackForm")
+                    .style.display = "none";
+
+                document.getElementById("thankYou")
+                    .style.display = "block";
+            }
+
+        }
+
+    </script>
 
 </body>
+
 </html>
