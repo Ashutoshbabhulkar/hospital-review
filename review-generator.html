@@ -597,16 +597,56 @@
             do {
                 let parts = [pick(openings)];
                 shuffle(sel).forEach(k => parts.push(pick(lib[k])));
+                const brandStatements = [
+                `One thing that stood out was the professionalism of ${pick(brands)}.`,
+
+                `I particularly appreciated the dedication shown by ${pick(brands)}.`,
+
+                `${pick(brands)} made the entire experience comfortable and reassuring.`,
+
+                `The commitment demonstrated by ${pick(brands)} was remarkable.`,
+
+                `The quality of service provided by ${pick(brands)} exceeded my expectations.`
+
+                ];
+
                 parts.push(
-                    `What impressed me most about ${pick(brands)} was the consistent focus on quality patient care and professionalism.`
+                pick(brandStatements)
                 );
+                if(Math.random() < 0.30){
 
-                if (Math.random() < 0.30) {
                     parts.push(
-                        `The hospital is known for ${pick(seoMentions)}.`
+                    `The hospital is known for ${pick(seoMentions)}.`
                     );
-                }
 
+                }
+                if(
+                    sel.includes("pathology")
+                    &&
+                    Math.random() < 0.40
+                ){
+
+                    parts.push(
+                    `I was particularly impressed by their ${pick(pathologySeoMentions)}.`
+                    );
+
+                }
+                if(
+                    sel.includes("surgeon")
+                    &&
+                    Math.random() < 0.35
+                ){
+
+                    parts.push(
+                    pick(laparoscopicReviewSentences)
+                    );
+
+                    parts.push(
+                    `The hospital also offers ${pick(laparoscopicSeoMentions)}.`
+                    );
+
+                }
+                
                 parts.push(pick(closings));
                 r = parts.join(" ");
             } while (r === last);
