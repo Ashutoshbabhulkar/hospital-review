@@ -1,296 +1,650 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>AAS Review Generator Elite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4fafb;
+            padding: 20px
+        }
 
-<title>Generate Your Review - AAS Hospital</title>
+        .wrap {
+            max-width: 1000px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08)
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        h1 {
+            text-align: center;
+            color: #1B4D3E
+        }
 
-<style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 10px
+        }
 
-:root{
-    --green:#1B4D3E;
-    --red:#E63946;
-}
+        label {
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 12px;
+            display: block
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        button {
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer
+        }
 
-body{
-    font-family:'Poppins',sans-serif;
-    background:#f7fafc;
-    padding:20px;
-}
+        .primary {
+            background: #1B4D3E;
+            color: #fff;
+            width: 100%;
+            margin-top: 12px
+        }
 
-.container{
-    max-width:900px;
-    margin:auto;
-}
+        .secondary {
+            background: #A7D8F0;
+            width: 100%;
+            margin-top: 12px
+        }
 
-.card{
-    background:white;
-    border-radius:20px;
-    padding:30px;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-h1{
-    color:var(--green);
-    text-align:center;
-    margin-bottom:10px;
-}
-
-.subtitle{
-    text-align:center;
-    color:#666;
-    margin-bottom:30px;
-}
-
-.options{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
-
-.option{
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:15px;
-}
-
-.generate-btn{
-    width:100%;
-    margin-top:25px;
-    background:var(--green);
-    color:white;
-    border:none;
-    padding:15px;
-    border-radius:12px;
-    cursor:pointer;
-}
-
-.review-box{
-    display:none;
-    margin-top:25px;
-}
-
-textarea{
-    width:100%;
-    min-height:220px;
-    padding:15px;
-    border:1px solid #ddd;
-    border-radius:12px;
-    font-family:inherit;
-}
-
-.submit-btn{
-    width:100%;
-    margin-top:15px;
-    background:var(--red);
-    color:white;
-    border:none;
-    padding:15px;
-    border-radius:12px;
-    cursor:pointer;
-}
-
-.copy-message{
-    display:none;
-    text-align:center;
-    margin-top:15px;
-    color:var(--green);
-    font-weight:600;
-}
-
-@media(max-width:700px){
-
-.options{
-    grid-template-columns:1fr;
-}
-
-}
-
-</style>
+        textarea {
+            width: 100%;
+            min-height: 220px;
+            margin-top: 15px
+        }
+    </style>
 </head>
+
 <body>
+    <div class="wrap">
+        <h1>AAS Hospital Review Generator Elite</h1>
+        <p>Select 2-5 strengths.</p>
+        <div class="grid" id="opts"></div>
+        <button class="primary" onclick="generateReview()">Generate Review</button>
+        <div id="box" style="display:none">
 
-<div class="container">
+            <textarea id="review"></textarea>
 
-<div class="card">
+            <button class="secondary" onclick="generateReview()">
+                Generate Another Review
+            </button>
 
-<h1>Thank You For Your 5-Star Rating ⭐⭐⭐⭐⭐</h1>
+            <button class="primary" onclick="submitGoogleReview()">
+                Submit Google Review
+            </button>
 
-<p class="subtitle">
-What did you like most about AAS Hospital?
-</p>
+        </div>
+    </div>
+    <script>
+        const options = [
+            ['doctor', 'Best Doctor in Wardha'], ['surgeon', 'Best Surgeon in Wardha'], ['pathology', 'Best Pathology Lab in Wardha'],
+            ['staff', 'Excellent Staff'], ['reports', 'Fast Reports'], ['clean', 'Clean Hospital'],
+            ['emergency', 'Emergency Care'], ['affordable', 'Affordable Treatment'], ['friendly', 'Friendly Doctors'],
+            ['modern', 'Modern Facilities'], ['diagnosis', 'Accurate Diagnosis'], ['care', 'Patient-Centered Care']
+        ];
+        document.getElementById('opts').innerHTML = options.map(o => `<label><input type="checkbox" value="${o[0]}"> ${o[1]}</label>`).join('');
 
-<div class="options">
+        const openings = [
+            "I recently visited AAS Hospital and was very impressed with the overall experience.",
+            "My experience at AAS Hospital & Pathology exceeded my expectations.",
+            "I am grateful for the care and attention I received during my visit.",
+            "I would like to thank the entire team for the excellent treatment provided.",
+            "Finding reliable healthcare can be difficult, but my experience here was reassuring.",
+            "I visited AAS Hospital for treatment and was pleasantly surprised by the quality of care.",
+            "From the moment I arrived, I felt that I was in good hands.",
+            "The professionalism shown by the medical team stood out from the beginning.",
+            "I had heard positive things about AAS Hospital, and my experience confirmed them.",
+            "My family and I had a very positive experience during our recent visit.",
+            "I was impressed by how smoothly everything was managed throughout my treatment.",
+            "This was my first visit to AAS Hospital, and it left a very positive impression.",
+            "I recently underwent treatment here and felt supported throughout the process.",
+            "The care I received was both professional and compassionate.",
+            "I wanted to take a moment to appreciate the excellent healthcare services provided here.",
+            "My visit was comfortable, efficient, and professionally managed.",
+            "I had a wonderful experience and felt genuinely cared for.",
+            "The hospital staff made a stressful situation much easier to handle.",
+            "I am extremely satisfied with the services I received during my visit.",
+            "The level of patient care here deserves recognition.",
+            "I felt welcomed and supported throughout my entire experience.",
+            "The dedication shown by the healthcare team was truly impressive.",
+            "I recently visited for consultation and was highly satisfied with the service.",
+            "The quality of care provided here reflects a strong commitment to patients.",
+            "I appreciate the professionalism and kindness shown by everyone involved in my treatment.",
+            "This hospital provided one of the best healthcare experiences I have had.",
+            "I felt confident in the treatment process from the very beginning.",
+            "My treatment journey here was smooth, reassuring, and well-organized.",
+            "I am thankful for the guidance and support provided by the team.",
+            "Every aspect of my visit was handled with care and professionalism.",
+            "I left the hospital feeling satisfied and well-informed.",
+            "The entire experience reflected a high standard of medical care.",
+            "I was impressed by the attention given to every detail of my treatment.",
+            "My concerns were addressed with patience and professionalism.",
+            "The team went above and beyond to ensure a positive experience.",
+            "I am happy to share my positive experience with AAS Hospital.",
+            "The commitment to patient wellbeing was evident throughout my visit.",
+            "My experience here reinforced the importance of quality healthcare.",
+            "The healthcare services provided were both efficient and compassionate.",
+            "I would like to express my sincere appreciation for the outstanding care I received."
+        ];
 
-<label class="option"><input type="checkbox" value="Best Doctor in Wardha"> Best Doctor in Wardha</label>
-<label class="option"><input type="checkbox" value="Best Surgeon in Wardha"> Best Surgeon in Wardha</label>
-<label class="option"><input type="checkbox" value="Best Pathology Lab in Wardha"> Best Pathology Lab in Wardha</label>
-<label class="option"><input type="checkbox" value="Excellent Staff"> Excellent Staff</label>
-<label class="option"><input type="checkbox" value="Fast Reports"> Fast Reports</label>
-<label class="option"><input type="checkbox" value="Clean Hospital"> Clean Hospital</label>
-<label class="option"><input type="checkbox" value="Emergency Care"> Emergency Care</label>
-<label class="option"><input type="checkbox" value="Affordable Treatment"> Affordable Treatment</label>
-<label class="option"><input type="checkbox" value="Friendly Doctors"> Friendly Doctors</label>
-<label class="option"><input type="checkbox" value="Modern Facilities"> Modern Facilities</label>
-<label class="option"><input type="checkbox" value="Accurate Diagnosis"> Accurate Diagnosis</label>
-<label class="option"><input type="checkbox" value="Patient-Centered Care"> Patient-Centered Care</label>
+        const closings = [
+            "I would highly recommend AAS Hospital to anyone seeking quality healthcare services in Wardha.",
+            "Thank you to the entire team for their dedication and professionalism.",
+            "I would confidently recommend this hospital to friends and family.",
+            "A trusted choice for healthcare and diagnostics in Wardha.",
+            "I truly appreciate the efforts of everyone involved in my care.",
+            "Wishing the team continued success in serving the community.",
+            "The experience exceeded my expectations in every way.",
+            "I look forward to choosing this hospital again whenever needed.",
+            "Highly recommended for anyone looking for reliable medical care.",
+            "Thank you for making my healthcare experience so positive.",
+            "The quality of service here deserves recognition.",
+            "I am grateful for the care and support I received.",
+            "The team has earned my trust and confidence.",
+            "This hospital sets a great example of patient-focused healthcare.",
+            "One of the most satisfying healthcare experiences I have had.",
+            "I am happy to recommend their services without hesitation.",
+            "The professionalism and compassion shown here were exceptional.",
+            "I appreciate the commitment to delivering quality healthcare.",
+            "Thank you for providing such dependable medical services.",
+            "The hospital continues to maintain high standards of patient care.",
+            "I am thankful for the positive experience and excellent treatment.",
+            "A dependable healthcare destination for patients and families alike.",
+            "The staff and doctors deserve recognition for their outstanding work.",
+            "My overall experience was excellent and memorable.",
+            "I would gladly return if I ever need medical care in the future.",
+            "The dedication shown by the team was truly commendable.",
+            "This hospital has earned a strong reputation for good reason.",
+            "I left feeling reassured, informed, and well cared for.",
+            "Thank you for making a difficult situation much easier.",
+            "The entire process reflected professionalism and genuine care.",
+            "I appreciate the attention given to patient comfort and wellbeing.",
+            "This was a healthcare experience worth sharing.",
+            "I felt respected and valued throughout my treatment journey.",
+            "The quality of care speaks for itself.",
+            "A hospital that truly puts patients first.",
+            "The services provided were efficient, reliable, and compassionate.",
+            "I would encourage others to consider this hospital with confidence.",
+            "Thank you for maintaining such high standards of care.",
+            "The positive impact of your work is greatly appreciated.",
+            "My experience here has been overwhelmingly positive."
+        ];
 
-</div>
+        const brands = [
+            "AAS Hospital",
+            "AAS Hospital & Pathology",
+            "the hospital",
+            "the healthcare team",
+            "the medical team",
+            "the doctors and staff",
+            "the entire hospital team",
+            "the care team",
+            "the healthcare professionals here",
+            "the team at AAS Hospital",
+            "the medical staff",
+            "the clinical team",
+            "the hospital management and staff",
+            "the specialists and support team",
+            "the healthcare providers",
+            "the professionals at AAS Hospital",
+            "the treatment team",
+            "the dedicated staff and doctors",
+            "the patient care team",
+            "the medical professionals",
+            "the diagnostic and healthcare team",
+            "the hospital's healthcare staff",
+            "the caring professionals here",
+            "the experienced medical team",
+            "everyone involved in patient care"
+        ];
 
-<button class="generate-btn" onclick="generateReview()">
-Generate My Review
-</button>
+        const seoMentions = [
+            "quality healthcare services in Wardha",
+            "trusted healthcare services in Wardha",
+            "reliable medical care in Wardha",
+            "advanced healthcare facilities in Wardha",
+            "patient-focused healthcare in Wardha",
+            "professional healthcare services in Wardha",
+            "quality diagnostics and treatment in Wardha",
+            "modern healthcare solutions in Wardha",
+            "trusted medical professionals in Wardha",
+            "comprehensive healthcare services in Wardha"
+        ];
 
-<div class="review-box" id="reviewBox">
+        const localServiceMentions = [
 
-<textarea id="reviewText"></textarea>
+            "best pathology lab in Wardha",
+            "trusted pathology services in Wardha",
+            "laparoscopic surgery specialist in Wardha",
+            "gallbladder surgery in Wardha",
+            "appendix surgery in Wardha",
+            "hernia surgery in Wardha",
+            "health checkup services in Wardha",
+            "diagnostic center in Wardha",
+            "general surgery services in Wardha",
+            "advanced healthcare services in Wardha"
 
-<button
-class="submit-btn"
-onclick="submitGoogleReview()">
-Submit Google Review
-</button>
+        ];
+        const laparoscopicReviewSentences = [
 
-<p id="copyMessage" class="copy-message">
-Opening Google Review page...
-</p>
+            "My recovery was much quicker than I expected thanks to the laparoscopic procedure.",
 
-</div>
+            "The minimally invasive approach helped reduce discomfort and made recovery smoother.",
 
-</div>
+            "I was impressed by the expertise shown during the laparoscopic treatment.",
 
-</div>
+            "The surgical team explained the laparoscopic procedure clearly and made me feel comfortable.",
 
-<script>
+            "The entire laparoscopic surgery process was handled professionally from consultation to recovery.",
 
-const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbw-pCWG_45x8cWkx8oozGAeazeR7XUrsbS3KBF6SH5gDqxovxMiSpSa5wuFrv0-ZQ4e/exec";
+            "I appreciated the modern surgical techniques used during my treatment.",
 
-let selectedOptions = [];
+            "The procedure was performed efficiently and the post-operative care was excellent.",
 
-function generateReview(){
+            "I experienced minimal discomfort and was able to resume normal activities sooner than expected.",
 
-    selectedOptions = [];
+            "The surgeon's expertise in laparoscopic treatment gave me complete confidence.",
 
-    document.querySelectorAll(
-    'input[type="checkbox"]:checked'
-    ).forEach(item=>{
-        selectedOptions.push(item.value);
-    });
+            "The hospital's advanced surgical facilities contributed to a positive treatment experience."
 
-    if(selectedOptions.length < 2){
+        ];
 
-        alert("Please select at least 2 options.");
+        const laparoscopicSeoMentions = [
 
-        return;
-    }
+            "advanced laparoscopic surgery in Wardha",
+            "minimally invasive surgical treatment",
+            "expert laparoscopic surgical care",
+            "modern laparoscopic procedures",
+            "safe and effective laparoscopic surgery",
+            "experienced laparoscopic surgeons",
+            "advanced keyhole surgery techniques",
+            "professional laparoscopic treatment services",
+            "trusted laparoscopic surgery specialists",
+            "high-quality surgical care in Wardha",
+            "modern surgical facilities and expertise",
+            "successful minimally invasive procedures",
+            "patient-focused surgical treatment",
+            "excellent laparoscopic care and support",
+            "advanced surgical treatment options",
+            "specialized laparoscopic surgery services",
+            "efficient and comfortable surgical experience",
+            "expert surgical guidance and care",
+            "reliable minimally invasive treatment",
+            "comprehensive laparoscopic surgical services"
 
-    let review =
-    "I had an excellent experience at AAS Hospital & Pathology. ";
+        ];
+        const pathologySeoMentions = [
 
-    if(selectedOptions.includes("Best Doctor in Wardha") ||
-       selectedOptions.includes("Friendly Doctors")){
+            "accurate pathology services in Wardha",
+            "trusted pathology laboratory in Wardha",
+            "reliable diagnostic services in Wardha",
+            "timely pathology reports in Wardha",
+            "advanced pathology testing services",
+            "high-quality laboratory services in Wardha",
+            "professional diagnostic support in Wardha",
+            "dependable pathology and laboratory services",
+            "modern pathology facilities in Wardha",
+            "efficient blood testing and diagnostics",
+            "accurate medical testing and reporting",
+            "comprehensive pathology services",
+            "fast and reliable laboratory reports",
+            "well-equipped diagnostic laboratory",
+            "patient-focused pathology services",
+            "advanced diagnostic testing facilities",
+            "quality pathology and healthcare services",
+            "trusted diagnostics and pathology care",
+            "professional laboratory testing experience",
+            "efficient pathology and diagnostic solutions"
 
-        review +=
-        "The doctors were knowledgeable, caring and took the time to explain everything clearly. ";
-    }
+        ];
+        const lib = {
+            doctor: [
+                "The doctors were highly knowledgeable and took time to explain every aspect of my treatment.",
+                "I was impressed by the expertise and professionalism shown by the doctors.",
+                "The medical team listened carefully to my concerns and provided clear guidance.",
+                "The doctors demonstrated exceptional clinical knowledge throughout my visit.",
+                "I felt confident in the treatment plan because everything was explained thoroughly.",
+                "The doctors were approachable, patient, and willing to answer all my questions.",
+                "The level of medical expertise here is truly commendable.",
+                "I appreciated how carefully the doctors assessed my condition before recommending treatment.",
+                "The consultation was detailed, informative, and reassuring.",
+                "The doctors treated me with genuine care and respect.",
+                "Their ability to explain complex medical issues in simple terms was impressive.",
+                "I felt that my health concerns were taken seriously from the very beginning.",
+                "The doctors combined professional expertise with a compassionate approach.",
+                "The quality of medical advice I received exceeded my expectations.",
+                "The consultation process was thorough and patient-focused.",
+                "I was impressed by the doctors' commitment to achieving the best possible outcome.",
+                "The healthcare professionals here inspire confidence and trust.",
+                "Every interaction with the doctors reflected experience and professionalism.",
+                "I felt reassured knowing I was being treated by such skilled medical professionals.",
+                "The doctors provided excellent care while maintaining clear and open communication."
+            ],
 
-    if(selectedOptions.includes("Best Surgeon in Wardha")){
+            surgeon: [
+                "The surgical team demonstrated exceptional skill and professionalism.",
+                "I felt completely confident in the surgeon's expertise throughout the procedure.",
+                "The surgeon explained the process clearly and addressed all my concerns.",
+                "The surgical care provided was outstanding from start to finish.",
+                "I was impressed by the precision and professionalism of the surgical team.",
+                "The surgeon's experience and confidence were evident throughout my treatment.",
+                "The entire surgical process was managed efficiently and carefully.",
+                "I felt reassured knowing I was in capable hands.",
+                "The attention to detail shown by the surgical team was remarkable.",
+                "The surgeon maintained excellent communication before and after the procedure.",
+                "The professionalism displayed during treatment exceeded my expectations.",
+                "The surgical outcome was excellent and the recovery guidance was very helpful.",
+                "The team ensured I felt informed and comfortable throughout the process.",
+                "The expertise of the surgeon gave me confidence from the very beginning.",
+                "Every stage of the procedure was handled with care and precision.",
+                "The surgical department reflects a high standard of healthcare.",
+                "I appreciate the dedication and expertise shown by the surgeon.",
+                "The procedure was carried out smoothly and professionally.",
+                "The surgeon's calm and reassuring approach made a significant difference.",
+                "I am grateful for the excellent surgical care I received."
+            ],
 
-        review +=
-        "The surgical team was highly skilled, professional and reassuring throughout the treatment process. ";
-    }
+            pathology: [
+                "The pathology services were accurate, efficient, and dependable.",
+                "Reports were delivered on time without compromising quality.",
+                "The laboratory team maintained high standards of accuracy and professionalism.",
+                "I was impressed by the efficiency of the diagnostic services.",
+                "The pathology department provided reliable and timely results.",
+                "The report turnaround time was excellent.",
+                "The diagnostic process was smooth and well organized.",
+                "I appreciated the accuracy and reliability of the pathology services.",
+                "The laboratory staff handled everything professionally.",
+                "The diagnostic facilities were modern and well equipped.",
+                "The reports were detailed, accurate, and easy to understand.",
+                "The pathology team ensured a seamless testing experience.",
+                "I received my reports much sooner than expected.",
+                "The commitment to accuracy was evident throughout the process.",
+                "The diagnostic services helped facilitate timely treatment decisions.",
+                "The laboratory department operates with impressive efficiency.",
+                "I felt confident in the quality of the diagnostic results.",
+                "The entire testing process was convenient and stress-free.",
+                "The pathology services reflected a strong commitment to patient care.",
+                "The laboratory team delivered dependable results with remarkable professionalism."
+            ],
 
-    if(selectedOptions.includes("Best Pathology Lab in Wardha") ||
-       selectedOptions.includes("Fast Reports") ||
-       selectedOptions.includes("Accurate Diagnosis")){
+            staff: [
+                "The staff was courteous, helpful, and attentive throughout my visit.",
+                "Every staff member treated me with kindness and respect.",
+                "The support team ensured a comfortable and positive experience.",
+                "The professionalism of the staff was evident from the moment I arrived.",
+                "I was impressed by how organized and efficient the staff was.",
+                "The staff maintained excellent communication throughout the process.",
+                "Everyone I interacted with was friendly and approachable.",
+                "The support provided by the staff made the entire experience stress-free.",
+                "The staff consistently demonstrated patience and professionalism.",
+                "I appreciated the warm and welcoming atmosphere created by the team.",
+                "The hospital staff went above and beyond to assist patients.",
+                "The level of customer service exceeded my expectations.",
+                "Every interaction reflected genuine care and concern for patients.",
+                "The staff was responsive, efficient, and supportive.",
+                "The dedication shown by the team was truly commendable.",
+                "The support staff played an important role in making my visit comfortable.",
+                "The team worked together seamlessly to ensure a positive experience.",
+                "I felt welcomed and valued throughout my time at the hospital.",
+                "The staff handled every situation professionally and calmly.",
+                "Their commitment to patient satisfaction was evident at every stage."
+            ],
+            reports: [
+                "Reports were delivered promptly and accurately.",
+                "The turnaround time for reports was excellent.",
+                "I received my reports much sooner than expected.",
+                "The reporting process was smooth and efficient.",
+                "Diagnostic reports were provided without unnecessary delays.",
+                "The speed and accuracy of reporting were impressive.",
+                "I appreciated how quickly the reports were made available.",
+                "Timely reports helped ensure faster treatment decisions.",
+                "The entire reporting process was well organized.",
+                "Results were delivered exactly when promised.",
+                "The pathology reports were detailed and easy to understand.",
+                "Quick access to reports made the treatment process smoother.",
+                "The hospital maintains excellent efficiency in report delivery.",
+                "I was impressed by the promptness of the diagnostic reporting.",
+                "The reports were accurate, reliable, and delivered on time.",
+                "The reporting system was convenient and hassle-free.",
+                "I never had to follow up repeatedly for my reports.",
+                "The hospital's commitment to timely reporting was evident.",
+                "Receiving reports quickly reduced a lot of stress and uncertainty.",
+                "The speed of service exceeded my expectations."
+            ],
 
-        review +=
-        "The pathology services were accurate, reliable and reports were delivered promptly. ";
-    }
+            clean: [
+                "The hospital maintained exceptional cleanliness and hygiene standards.",
+                "The environment was spotless and well organized.",
+                "Cleanliness was evident throughout the facility.",
+                "The hospital premises were neat, comfortable, and hygienic.",
+                "I was impressed by the attention given to cleanliness.",
+                "The entire facility was maintained to a very high standard.",
+                "The clean environment contributed to a positive experience.",
+                "Every area of the hospital appeared well maintained.",
+                "Hygiene protocols were clearly followed throughout the facility.",
+                "The hospital provided a safe and hygienic environment for patients.",
+                "Clean surroundings made the experience more comfortable.",
+                "The facility reflected a strong commitment to patient safety.",
+                "The hospital's cleanliness exceeded my expectations.",
+                "Attention to hygiene was visible in every department.",
+                "The premises were consistently clean and organized.",
+                "The hospital provided a welcoming and hygienic atmosphere.",
+                "The clean environment helped create confidence and comfort.",
+                "I appreciated the high standards of cleanliness maintained here.",
+                "The facility was well cared for and professionally maintained.",
+                "The hospital reflects a strong focus on hygiene and patient wellbeing."
+            ],
 
-    if(selectedOptions.includes("Excellent Staff")){
+            emergency: [
+                "Emergency services were prompt and efficiently managed.",
+                "The emergency team responded quickly and professionally.",
+                "Urgent care was provided without unnecessary delays.",
+                "The responsiveness of the emergency department was impressive.",
+                "The emergency staff handled the situation calmly and effectively.",
+                "I received immediate attention when it was needed most.",
+                "The emergency team worked efficiently under pressure.",
+                "Emergency care was delivered with professionalism and compassion.",
+                "The speed of response exceeded my expectations.",
+                "The staff ensured timely medical attention during a stressful situation.",
+                "The emergency department was well organized and efficient.",
+                "I felt reassured by the competence of the emergency team.",
+                "Critical care was handled with expertise and confidence.",
+                "The hospital demonstrated excellent emergency management.",
+                "The team remained calm and focused throughout the process.",
+                "Prompt emergency care made a significant difference.",
+                "The emergency services reflected a high standard of healthcare.",
+                "The doctors and staff responded quickly to my needs.",
+                "I was impressed by the preparedness of the emergency department.",
+                "The emergency care experience was smooth, professional, and reassuring."
+            ],
 
-        review +=
-        "The staff was courteous, supportive and always willing to help. ";
-    }
+            affordable: [
+                "The treatment was affordable without compromising quality.",
+                "The hospital offers excellent value for the services provided.",
+                "Healthcare was delivered in a cost-effective and patient-friendly manner.",
+                "I appreciated the transparent and reasonable pricing.",
+                "The quality of care received was exceptional considering the affordability.",
+                "The services provided were worth every rupee spent.",
+                "The hospital maintains a good balance between cost and quality.",
+                "Affordable treatment options made healthcare more accessible.",
+                "I was satisfied with both the quality and cost of treatment.",
+                "The pricing structure was fair and transparent.",
+                "The hospital provides quality healthcare at reasonable rates.",
+                "I appreciated the honest and straightforward billing process.",
+                "The cost of treatment was manageable without compromising care.",
+                "The services were affordable while maintaining professional standards.",
+                "The hospital offers excellent healthcare value for patients.",
+                "The treatment costs were clearly explained in advance.",
+                "I found the overall experience both affordable and reliable.",
+                "The hospital ensures quality care remains accessible to patients.",
+                "The affordability of services was a pleasant surprise.",
+                "Reasonable pricing combined with excellent care made a positive impression."
+            ],
 
-    if(selectedOptions.includes("Clean Hospital")){
+            friendly: [
+                "The doctors were approachable and easy to talk to.",
+                "The medical team created a welcoming atmosphere.",
+                "I appreciated the friendly and caring attitude of the doctors.",
+                "The doctors took time to listen and understand my concerns.",
+                "The healthcare professionals treated patients with warmth and respect.",
+                "I felt comfortable discussing my health concerns with the doctors.",
+                "The friendly nature of the doctors made the experience reassuring.",
+                "The doctors were patient, kind, and understanding.",
+                "Every interaction with the medical team was positive and supportive.",
+                "The doctors explained everything in a calm and friendly manner.",
+                "I felt genuinely cared for throughout my treatment.",
+                "The approachable nature of the doctors inspired confidence.",
+                "The doctors ensured I felt comfortable at every stage.",
+                "The medical team combined professionalism with friendliness.",
+                "The doctors treated me like a person, not just a patient.",
+                "The supportive attitude of the doctors stood out.",
+                "I appreciated the personal attention provided by the medical team.",
+                "The doctors made a stressful situation easier to handle.",
+                "The friendliness of the healthcare team was truly commendable.",
+                "The positive attitude of the doctors contributed greatly to my experience."
+            ],
 
-        review +=
-        "The hospital maintained excellent cleanliness and hygiene standards. ";
-    }
+            modern: [
+                "The facilities were modern and well equipped.",
+                "The hospital uses advanced infrastructure to support quality care.",
+                "Modern facilities contributed to a smooth patient experience.",
+                "The hospital combines technology with patient comfort.",
+                "The equipment and facilities reflected high healthcare standards.",
+                "I was impressed by the modern environment and infrastructure.",
+                "The hospital is equipped with advanced medical technology.",
+                "The facilities support efficient and effective patient care.",
+                "The modern setup enhanced the overall treatment experience.",
+                "The infrastructure reflects a commitment to healthcare excellence.",
+                "The hospital maintains up-to-date medical facilities.",
+                "The advanced equipment inspired confidence in the treatment process.",
+                "Modern technology helps ensure quality patient care.",
+                "The facilities were comfortable, efficient, and professionally maintained.",
+                "The hospital provides a modern healthcare experience.",
+                "The infrastructure supports accurate diagnosis and treatment.",
+                "I appreciated the well-equipped and patient-friendly environment.",
+                "The facilities exceeded my expectations in terms of quality and comfort.",
+                "The hospital demonstrates a strong investment in modern healthcare.",
+                "The advanced facilities helped make the experience more reassuring."
+            ],
 
-    if(selectedOptions.includes("Modern Facilities")){
+            diagnosis: [
+                "The diagnostic process was thorough and accurate.",
+                "I was impressed by the attention given to diagnostic accuracy.",
+                "The medical assessments were detailed and reliable.",
+                "Accurate diagnosis contributed to effective treatment planning.",
+                "The doctors carefully evaluated my condition before recommending treatment.",
+                "The diagnostic services inspired confidence and trust.",
+                "I appreciated the thoroughness of the medical evaluation.",
+                "The hospital demonstrated a strong commitment to accurate diagnosis.",
+                "Every aspect of the assessment process was handled professionally.",
+                "The diagnostic standards maintained here are impressive.",
+                "I felt reassured by the detailed medical examination.",
+                "The doctors ensured a complete understanding of my condition.",
+                "The quality of diagnostic services exceeded my expectations.",
+                "Accurate assessments helped provide clarity and peace of mind.",
+                "The diagnosis process was both efficient and dependable.",
+                "The hospital's approach to diagnosis reflected professionalism and expertise.",
+                "I was impressed by the attention to detail during evaluation.",
+                "The medical team ensured that no aspect of my condition was overlooked.",
+                "The diagnostic process was comprehensive and patient-focused.",
+                "The hospital maintains high standards of diagnostic excellence."
+            ],
 
-        review +=
-        "The facilities were modern, comfortable and well-equipped. ";
-    }
+            care: [
+                "The patient-centered approach made me feel valued and respected.",
+                "Compassionate care was evident throughout my experience.",
+                "The focus on patient wellbeing was clear at every stage.",
+                "I appreciated the personal attention provided by the healthcare team.",
+                "The doctors and staff genuinely cared about my comfort and recovery.",
+                "The hospital places patients at the center of its services.",
+                "Every decision appeared focused on achieving the best outcome for patients.",
+                "The care provided was both professional and compassionate.",
+                "I felt supported and reassured throughout my treatment journey.",
+                "The team demonstrated a genuine commitment to patient wellbeing.",
+                "The hospital's approach to care exceeded my expectations.",
+                "The staff took time to understand my concerns and priorities.",
+                "The healthcare team made me feel comfortable and respected.",
+                "I appreciated the empathy shown during my treatment process.",
+                "The patient experience was clearly a top priority.",
+                "The care provided reflected both expertise and compassion.",
+                "The team consistently prioritized comfort and communication.",
+                "I felt listened to and involved in decisions regarding my treatment.",
+                "The hospital maintains an impressive standard of patient care.",
+                "The dedication to patient satisfaction was evident throughout my visit."
+            ]
+        };
 
-    if(selectedOptions.includes("Emergency Care")){
+        let last = "";
+        function pick(a) { return a[Math.floor(Math.random() * a.length)] }
+        function shuffle(a) { return [...a].sort(() => Math.random() - 0.5) }
 
-        review +=
-        "Emergency services were prompt and efficiently managed. ";
-    }
+        function generateReview() {
+            const sel = [...document.querySelectorAll('input:checked')].map(x => x.value);
+            if (sel.length < 2 || sel.length > 5) { alert('Select between 2 and 5 options'); return; }
+            let r = "";
+            do {
+                let parts = [pick(openings)];
+                shuffle(sel).forEach(k => parts.push(pick(lib[k])));
+                parts.push(
+                    `What impressed me most about ${pick(brands)} was the consistent focus on quality patient care and professionalism.`
+                );
 
-    if(selectedOptions.includes("Affordable Treatment")){
+                if (Math.random() < 0.30) {
+                    parts.push(
+                        `The hospital is known for ${pick(seoMentions)}.`
+                    );
+                }
 
-        review +=
-        "The treatment was affordable without compromising quality. ";
-    }
+                parts.push(pick(closings));
+                r = parts.join(" ");
+            } while (r === last);
+            last = r;
+            document.getElementById('review').value = r;
+            document.getElementById('box').style.display = 'block';
+        }
+        const SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbw-pCWG_45x8cWkx8oozGAeazeR7XUrsbS3KBF6SH5gDqxovxMiSpSa5wuFrv0-ZQ4e/exec";
 
-    if(selectedOptions.includes("Patient-Centered Care")){
+        async function submitGoogleReview() {
 
-        review +=
-        "I appreciated the patient-centered approach and personal attention provided by the team. ";
-    }
+            const review =
+                document.getElementById("review").value;
 
-    review +=
-    "I would highly recommend AAS Hospital & Pathology to anyone looking for quality healthcare services in Wardha.";
+            try {
 
-    document.getElementById("reviewText").value = review;
+                await fetch(SCRIPT_URL, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        rating: "5",
+                        generatedReview: review
+                    })
+                });
 
-    document.getElementById("reviewBox").style.display = "block";
-}
+            } catch (error) { }
 
-async function submitGoogleReview(){
+            try {
+                await navigator.clipboard.writeText(review);
+            } catch (error) { }
 
-    const review =
-    document.getElementById("reviewText").value;
+            window.open(
+                "https://g.page/r/CZfxbPXREOsgEBM/review",
+                "_blank"
+            );
 
-    await fetch(SCRIPT_URL,{
-        method:"POST",
-        body:JSON.stringify({
-            rating:"5",
-            selectedOptions:selectedOptions.join(", "),
-            generatedReview:review
-        })
-    });
-
-    await navigator.clipboard.writeText(review);
-
-    document.getElementById("copyMessage")
-    .style.display="block";
-
-    setTimeout(function(){
-
-        window.open(
-        "https://g.page/r/CZfxbPXREOsgEBM/review",
-        "_blank");
-
-    },1000);
-}
-
-</script>
-
+        }
+    </script>
 </body>
+
 </html>
