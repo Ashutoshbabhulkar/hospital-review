@@ -8,7 +8,11 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f4fafb;
+            background:
+                linear-gradient(180deg,
+                    #D1ECF1 0%,
+                    #F8FBFC 50%,
+                    #FFFFFF 100%);
             padding: 20px
         }
 
@@ -47,54 +51,353 @@
         }
 
         .primary {
-            background: #1B4D3E;
-            color: #fff;
+
+            background: #EA1B23;
+
+            color: white;
+
             width: 100%;
-            margin-top: 12px
+
+            margin-top: 12px;
+
+            font-weight: 700;
+
+            transition: .25s;
+
+        }
+
+        .primary:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 20px rgba(234, 27, 35, .25);
+
         }
 
         .secondary {
-            background: #A7D8F0;
+
+            background: #005A63;
+
+            color: white;
+
             width: 100%;
-            margin-top: 12px
+
+            margin-top: 12px;
+
+            font-weight: 600;
+
         }
 
         textarea {
+
             width: 100%;
-            min-height: 220px;
-            margin-top: 15px
+
+            min-height: 260px;
+
+            margin-top: 15px;
+
+            border: none;
+
+            border-left:
+                6px solid #005A63;
+
+            border-radius: 18px;
+
+            background: #F8FBFC;
+
+            padding: 22px;
+
+            line-height: 1.9;
+
+            font-size: 15px;
+
+            color: #333;
+
+            resize: none;
+
+            box-shadow:
+                inset 0 2px 8px rgba(0, 0, 0, .03);
+
+        }
+
+        .hero-review {
+
+            text-align: center;
+
+            background:
+                linear-gradient(135deg,
+                    #ffffff,
+                    #D1ECF1);
+
+            padding: 40px;
+
+            border-radius: 30px;
+
+            margin-bottom: 25px;
+
+            border-top:
+                6px solid #005A63;
+
+            box-shadow:
+                0 20px 45px rgba(0, 90, 99, .12);
+
+        }
+
+        .hero-logo {
+            margin-bottom: 20px;
+        }
+
+        .hero-logo img {
+            width: 120px;
+            height: auto;
+        }
+
+        .option-card {
+
+            border: 2px solid #E5E7EB;
+
+            border-radius: 20px;
+
+            padding: 22px;
+
+            min-height: 100px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: .25s;
+
+            background: white;
+            position: relative;
+
+        }
+
+        .option-card:hover {
+
+            transform: translateY(-3px);
+
+            border-color: #005A63;
+
+            box-shadow:
+                0 10px 20px rgba(0, 90, 99, .08);
+
+        }
+
+        .option-card.selected {
+
+            background: #D1ECF1;
+
+            border-color: #005A63;
+
+            color: #005A63;
+
+            box-shadow:
+                0 12px 25px rgba(0, 90, 99, .15);
+
+            transform: translateY(-3px);
+
+        }
+
+        .option-card.selected::after {
+
+            content: "✓";
+
+            position: absolute;
+
+            top: 10px;
+
+            right: 12px;
+
+            width: 24px;
+
+            height: 24px;
+
+            border-radius: 50%;
+
+            background: #005A63;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+        }
+
+        .option-card input {
+
+            display: none;
+
+        }
+
+        .card-title {
+
+            font-weight: 600;
+
+            color: #005A63;
+
+            text-align: center;
+
+        }
+
+        .preview-title {
+
+            text-align: center;
+
+            color: #005A63;
+
+            margin-top: 25px;
+
+            margin-bottom: 10px;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+        }
+
+        .trust-box {
+
+            margin-top: 15px;
+
+            padding: 15px;
+
+            border-radius: 14px;
+
+            background: #D1ECF1;
+
+            color: #005A63;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            font-weight: 500;
+
         }
     </style>
 </head>
 
 <body>
+    <section class="hero-review">
+
+        <div class="hero-logo">
+            <img src="Aas Logo.png" alt="AAS Logo">
+        </div>
+
+        <h1>
+            Thank You For Your
+            <span>5-Star Rating ⭐</span>
+        </h1>
+
+        <p>
+            Your feedback helps other patients discover trusted
+            healthcare services in Wardha.
+        </p>
+
+    </section>
     <div class="wrap">
-        <h1>AAS Hospital Review Generator Elite</h1>
+        <h1>AAS Hospital & Pathology</h1>
         <p>Select 2-5 strengths.</p>
         <div class="grid" id="opts"></div>
         <button class="primary" onclick="generateReview()">Generate Review</button>
         <div id="box" style="display:none">
 
+
             <textarea id="review"></textarea>
 
+            <div class="trust-box">
+
+                🔒 Your review will be copied automatically and the Google Review page will open when you click Submit.
+
+            </div>
+
             <button class="secondary" onclick="generateReview()">
-                Generate Another Review
+                🔄 Generate Another Review
             </button>
 
             <button class="primary" onclick="submitGoogleReview()">
-                Submit Google Review
+                ⭐ Post My Google Review
             </button>
 
         </div>
+        <h2 class="preview-title">
+            Your Review Preview
+        </h2>
     </div>
     <script>
         const options = [
-            ['doctor', 'Best Doctor in Wardha'], ['surgeon', 'Best Surgeon in Wardha'], ['pathology', 'Best Pathology Lab in Wardha'],
-            ['staff', 'Excellent Staff'], ['reports', 'Fast Reports'], ['clean', 'Clean Hospital'],
-            ['emergency', 'Emergency Care'], ['affordable', 'Affordable Treatment'], ['friendly', 'Friendly Doctors'],
-            ['modern', 'Modern Facilities'], ['diagnosis', 'Accurate Diagnosis'], ['care', 'Patient-Centered Care']
+
+            ['doctor', '🩺 Best Doctor in Wardha'],
+            ['surgeon', '🩻 Best Surgeon in Wardha'],
+            ['pathology', '🔬 Best Pathology Lab in Wardha'],
+
+            ['staff', '👨‍⚕️ Excellent Staff'],
+            ['reports', '⚡ Fast Reports'],
+            ['clean', '🧹 Clean Hospital'],
+
+            ['emergency', '🚑 Emergency Care'],
+            ['affordable', '💰 Affordable Treatment'],
+            ['friendly', '😊 Friendly Doctors'],
+
+            ['modern', '🏥 Modern Facilities'],
+            ['diagnosis', '🧠 Accurate Diagnosis'],
+            ['care', '❤️ Patient-Centered Care']
+
         ];
-        document.getElementById('opts').innerHTML = options.map(o => `<label><input type="checkbox" value="${o[0]}"> ${o[1]}</label>`).join('');
+        document.getElementById('opts').innerHTML =
+            options.map(o => `<label class="option-card">
+            <input
+            type="checkbox"
+            value="${o[0]}">
+
+            <div class="card-title">
+            ${o[1]}
+            </div>
+
+            </label>
+
+            `).join('');
+
+        document
+            .querySelectorAll(".option-card")
+            .forEach(card => {
+
+                card.addEventListener("click", function () {
+
+                    const checkbox =
+                        this.querySelector("input");
+
+                    checkbox.checked =
+                        !checkbox.checked;
+
+                    if (checkbox.checked) {
+
+                        this.classList.add("selected");
+
+                    } else {
+
+                        this.classList.remove("selected");
+
+                    }
+
+                });
+
+            });
 
         const openings = [
             "I recently visited AAS Hospital and was very impressed with the overall experience.",
@@ -587,68 +890,500 @@
         };
 
         let last = "";
+        let lastOpening = "";
+
         function pick(a) { return a[Math.floor(Math.random() * a.length)] }
-        function shuffle(a) { return [...a].sort(() => Math.random() - 0.5) }
+        function shuffle(arr) {
+
+            let a = [...arr];
+
+            for (let i = a.length - 1; i > 0; i--) {
+
+                const j =
+                    Math.floor(
+                        Math.random() * (i + 1)
+                    );
+
+                [a[i], a[j]] =
+                    [a[j], a[i]];
+            }
+
+            return a;
+        }
+        function randomStructure(
+            opening,
+            body,
+            brandLine,
+            seoLines,
+            closing
+        ) {
+
+            const structures = [
+                () => [
+                    opening,
+                    brandLine,
+                    closing
+                ],
+
+                () => [
+                    opening,
+                    ...body,
+                    closing
+                ],
+
+                () => [
+                    opening,
+                    ...body.slice(0, 1),
+                    brandLine,
+                    closing
+                ],
+
+                () => [
+                    opening,
+                    ...body,
+                    ...seoLines,
+                    closing
+                ],
+
+                () => [
+                    opening,
+                    brandLine,
+                    ...body,
+                    closing
+                ],
+
+                () => [
+                    opening,
+                    ...body,
+                    brandLine,
+                    ...seoLines,
+                    closing
+                ],
+
+                () => [
+                    opening,
+                    brandLine,
+                    ...body,
+                    ...seoLines,
+                    closing
+                ],
+
+                () => [
+                    opening,
+                    ...body,
+                    closing
+                ],
+
+                () => [
+                    opening,
+                    ...seoLines,
+                    ...body,
+                    brandLine,
+                    closing
+                ],
+
+                () => [
+                    opening,
+                    brandLine,
+                    ...seoLines,
+                    ...body,
+                    closing
+                ]
+
+            ];
+
+            return pick(structures)();
+
+        }
+
+        const reviewTones = {
+
+            grateful: [
+
+                "I am genuinely thankful for the care I received.",
+                "I would like to express my sincere appreciation for the support provided.",
+                "I am grateful for the professionalism and kindness shown throughout my treatment.",
+                "The experience left me feeling thankful and reassured.",
+                "I truly appreciate the effort and dedication of the healthcare team.",
+                "I feel fortunate to have received such attentive medical care.",
+                "The compassion shown during my treatment made a significant difference.",
+                "I am thankful for the guidance and support provided at every stage.",
+                "The level of care I received deserves sincere appreciation.",
+                "I deeply appreciate the commitment shown by the doctors and staff.",
+                "The support I received throughout my treatment journey was invaluable.",
+                "I am grateful for the patience and understanding demonstrated by the team.",
+                "The care provided exceeded my expectations and earned my gratitude.",
+                "I would like to acknowledge the dedication shown by everyone involved in my treatment.",
+                "The kindness and professionalism of the healthcare team are greatly appreciated."
+
+            ],
+
+            professional: [
+
+                "The quality of healthcare services provided was impressive.",
+                "The entire process reflected strong professional standards.",
+                "The hospital maintains a high level of medical excellence.",
+                "The experience demonstrated a commitment to quality healthcare.",
+                "The standards of care exceeded my expectations.",
+                "The professionalism displayed throughout my treatment was remarkable.",
+                "The healthcare team consistently maintained excellent standards.",
+                "The medical services were delivered with efficiency and expertise.",
+                "The hospital reflects a strong focus on clinical excellence.",
+                "The quality of treatment and patient management was commendable.",
+                "The entire experience was handled with professionalism and attention to detail.",
+                "The level of organization and efficiency was highly impressive.",
+                "The hospital demonstrates a strong commitment to healthcare quality.",
+                "The expertise shown by the medical professionals inspired confidence.",
+                "The services provided reflected a patient-focused and professional approach."
+
+            ],
+
+            family: [
+
+                "My family and I were extremely satisfied with the experience.",
+                "The support provided to my family was greatly appreciated.",
+                "Our family felt comfortable and reassured throughout the treatment process.",
+                "The hospital created a positive experience for both patients and family members.",
+                "The entire family felt supported and well informed.",
+                "My loved ones were treated with kindness and respect throughout the process.",
+                "The healthcare team ensured our family remained informed at every stage.",
+                "We felt confident knowing our family member was receiving excellent care.",
+                "The support extended to family members made a meaningful difference.",
+                "The doctors and staff created a reassuring environment for our family.",
+                "Our concerns were addressed patiently and professionally.",
+                "The care provided helped ease the stress of a challenging situation.",
+                "The healthcare team treated our family with compassion and understanding.",
+                "The experience was positive for both the patient and accompanying family members.",
+                "The hospital demonstrated genuine concern for the wellbeing of our family."
+
+            ],
+
+            surgery: [
+
+                "The surgical care I received was excellent from start to finish.",
+                "The entire treatment process was managed with professionalism and expertise.",
+                "I felt confident throughout the surgical journey.",
+                "The healthcare team ensured a smooth treatment experience.",
+                "The quality of surgical care exceeded my expectations.",
+                "The surgeon explained every aspect of the procedure clearly and patiently.",
+                "I felt reassured by the expertise demonstrated throughout the treatment process.",
+                "The professionalism of the surgical team inspired complete confidence.",
+                "The procedure was handled efficiently and with great attention to detail.",
+                "The support provided before and after surgery was exceptional.",
+                "I appreciated the careful guidance provided during recovery.",
+                "The surgical team demonstrated both skill and compassion.",
+                "The treatment process was smooth and professionally managed.",
+                "The expertise of the surgeon contributed greatly to a positive outcome.",
+                "The entire surgical experience was handled with exceptional care."
+
+            ],
+
+            diagnostic: [
+
+                "The diagnostic services were efficient and dependable.",
+                "The attention to diagnostic accuracy was impressive.",
+                "The pathology and diagnostic facilities were excellent.",
+                "I appreciated the reliability of the testing process.",
+                "The diagnostic services contributed greatly to a positive experience.",
+                "The laboratory team maintained a high standard of professionalism.",
+                "The efficiency of the diagnostic process exceeded my expectations.",
+                "The pathology services were accurate, timely, and reliable.",
+                "I was impressed by the quality of diagnostic support provided.",
+                "The testing process was smooth, organized, and stress-free.",
+                "The hospital demonstrated a strong commitment to diagnostic accuracy.",
+                "The reports were delivered efficiently and helped facilitate timely treatment.",
+                "The diagnostic team ensured a seamless experience from start to finish.",
+                "The quality of pathology services inspired confidence and trust.",
+                "The entire diagnostic process reflected professionalism and expertise."
+
+            ],
+            patient: [
+
+                "As a patient, I felt comfortable and well cared for throughout my visit.",
+
+                "My experience from consultation to treatment was smooth and reassuring.",
+
+                "I felt confident in the care I received from the very beginning.",
+
+                "The entire process was handled professionally and efficiently.",
+
+                "I appreciated the time taken to understand my concerns.",
+
+                "I felt listened to and respected during every interaction.",
+
+                "The healthcare team made me feel comfortable throughout my treatment.",
+
+                "My concerns were addressed clearly and patiently.",
+
+                "I was impressed by the attention given to my wellbeing.",
+
+                "The experience exceeded my expectations in many ways.",
+
+                "I felt supported at every stage of the treatment process.",
+
+                "The doctors and staff ensured I was well informed throughout my visit.",
+
+                "I was treated with professionalism and genuine care.",
+
+                "The level of attention provided made a positive difference.",
+
+                "I felt reassured knowing I was receiving quality medical care.",
+
+                "The entire experience was organized and patient-friendly.",
+
+                "I appreciated the clear communication provided throughout treatment.",
+
+                "I never felt rushed during consultations or treatment discussions.",
+
+                "The healthcare team ensured all my questions were answered thoroughly.",
+
+                "I was impressed by the professionalism demonstrated throughout my visit.",
+
+                "My treatment journey was smoother than I expected.",
+
+                "The atmosphere was welcoming and reassuring from the start.",
+
+                "I felt valued as a patient throughout the entire process.",
+
+                "The quality of care I received was consistently excellent.",
+
+                "The team maintained excellent communication throughout my treatment.",
+
+                "I appreciated the personal attention given to my health concerns.",
+
+                "The doctors took time to explain everything in a simple and understandable way.",
+
+                "I felt confident in every step of the treatment process.",
+
+                "The hospital provided a comfortable and supportive environment.",
+
+                "The overall experience reflected a strong commitment to patient care.",
+
+                "I left feeling satisfied, informed, and reassured.",
+
+                "The staff and doctors worked together to create a positive experience.",
+
+                "I appreciated the patience and understanding shown by the healthcare team.",
+
+                "The treatment process was efficient without feeling rushed.",
+
+                "The level of professionalism throughout my visit was impressive.",
+
+                "I felt that my wellbeing was always the top priority.",
+
+                "The healthcare team made the entire process stress-free and comfortable.",
+
+                "My experience reflected both medical expertise and compassionate care.",
+
+                "The quality of service provided exceeded my expectations.",
+
+                "I would not hesitate to return if I require medical care in the future."
+
+            ]
+
+        };
+
+        const toneWeights = [
+
+            "patient", "patient", "patient", "patient", "patient", "patient", "patient",
+
+            "grateful", "grateful",
+
+            "professional", "professional",
+
+            "family",
+
+            "surgery",
+
+            "diagnostic"
+
+        ];
 
         function generateReview() {
             const sel = [...document.querySelectorAll('input:checked')].map(x => x.value);
             if (sel.length < 2 || sel.length > 5) { alert('Select between 2 and 5 options'); return; }
             let r = "";
             do {
-                let parts = [pick(openings)];
-                shuffle(sel).forEach(k => parts.push(pick(lib[k])));
+                let selectedTone = "patient";
+
+                if (
+                    sel.includes("surgeon")
+                    &&
+                    Math.random() < 0.60
+                ) {
+                    selectedTone = "surgery";
+                }
+                else if (
+                    (
+                        sel.includes("pathology")
+                        ||
+                        sel.includes("reports")
+                        ||
+                        sel.includes("diagnosis")
+                    )
+                    &&
+                    Math.random() < 0.50
+                ) {
+                    selectedTone = "diagnostic";
+                }
+                else {
+
+                    selectedTone = pick(toneWeights);
+
+                };
+
+                let openingLine;
+
+                do {
+
+                    openingLine =
+                        pick(openings);
+
+                }
+                while (
+                    openingLine === lastOpening
+                );
+
+                lastOpening = openingLine;
+
+                const toneSentence =
+                    pick(
+                        reviewTones[selectedTone]
+                    );
+
+                let body = [];
+                let used = new Set();
+
+                const reviewLength =
+                    pick([
+                        "short",
+                        "medium",
+                        "long"
+                    ]);
+
+                let selectedItems =
+                    shuffle(sel);
+
+                if (reviewLength === "short") {
+
+                    selectedItems =
+                        selectedItems.slice(
+                            0,
+                            Math.min(2, selectedItems.length)
+                        );
+
+                }
+
+                if (reviewLength === "medium") {
+
+                    selectedItems =
+                        selectedItems.slice(
+                            0,
+                            Math.min(3, selectedItems.length)
+                        );
+
+                }
+
+                selectedItems.forEach(k => {
+
+                    let sentence;
+
+                    do {
+
+                        sentence =
+                            pick(lib[k]);
+
+                    }
+                    while (
+                        used.has(sentence)
+                    );
+
+                    used.add(sentence);
+
+                    body.push(sentence);
+
+                });
+
                 const brandStatements = [
-                `One thing that stood out was the professionalism of ${pick(brands)}.`,
 
-                `I particularly appreciated the dedication shown by ${pick(brands)}.`,
-
-                `${pick(brands)} made the entire experience comfortable and reassuring.`,
-
-                `The commitment demonstrated by ${pick(brands)} was remarkable.`,
-
-                `The quality of service provided by ${pick(brands)} exceeded my expectations.`
+                    `One thing that stood out was the professionalism of ${pick(brands)}.`,
+                    `I particularly appreciated the dedication shown by ${pick(brands)}.`,
+                    `${pick(brands)} made the entire experience comfortable and reassuring.`,
+                    `The commitment demonstrated by ${pick(brands)} was remarkable.`,
+                    `The quality of service provided by ${pick(brands)} exceeded my expectations.`,
+                    `The attention to detail shown by ${pick(brands)} was remarkable.`,
+                    `${pick(brands)} consistently demonstrated professionalism and compassion.`,
+                    `I was impressed by the commitment shown by ${pick(brands)}.`,
+                    `${pick(brands)} created a positive and reassuring healthcare experience.`,
+                    `The quality standards maintained by ${pick(brands)} were evident throughout my visit.`,
+                    `${pick(brands)} made the entire treatment process smooth and stress-free.`,
+                    `The dedication displayed by ${pick(brands)} exceeded my expectations.`,
+                    `${pick(brands)} clearly prioritizes patient wellbeing and comfort.`,
+                    `I appreciated the coordinated efforts of ${pick(brands)}.`,
+                    `${pick(brands)} maintained excellent communication throughout my treatment journey.`
 
                 ];
 
-                parts.push(
-                pick(brandStatements)
-                );
-                if(Math.random() < 0.30){
+                const brandLine =
+                    pick(brandStatements);
 
-                    parts.push(
-                    `The hospital is known for ${pick(seoMentions)}.`
+                let seoLines = [];
+
+                if (Math.random() < 0.30) {
+
+                    seoLines.push(
+                        `The hospital is known for ${pick(seoMentions)}.`
                     );
 
                 }
-                if(
+                if (Math.random() < 0.15) {
+                    seoLines.push(
+                        `The hospital is also known for ${pick(localServiceMentions)}.`
+                    );
+                }
+
+                if (
                     sel.includes("pathology")
                     &&
                     Math.random() < 0.40
-                ){
+                ) {
 
-                    parts.push(
-                    `I was particularly impressed by their ${pick(pathologySeoMentions)}.`
+                    seoLines.push(
+                        `I was particularly impressed by their ${pick(pathologySeoMentions)}.`
                     );
 
                 }
-                if(
+
+                if (
                     sel.includes("surgeon")
                     &&
                     Math.random() < 0.35
-                ){
+                ) {
 
-                    parts.push(
-                    pick(laparoscopicReviewSentences)
+                    seoLines.push(
+                        pick(laparoscopicReviewSentences)
                     );
 
-                    parts.push(
-                    `The hospital also offers ${pick(laparoscopicSeoMentions)}.`
+                    seoLines.push(
+                        `The hospital also offers ${pick(laparoscopicSeoMentions)}.`
                     );
 
                 }
-                
-                parts.push(pick(closings));
-                r = parts.join(" ");
+
+                const closingLine =
+                    pick(closings);
+
+                const finalParts =
+                    randomStructure(
+                        openingLine,
+                        [toneSentence, ...body],
+                        brandLine,
+                        seoLines,
+                        closingLine
+                    );
+
+                r =
+                    finalParts.join(" ");
             } while (r === last);
             last = r;
             document.getElementById('review').value = r;
