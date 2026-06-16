@@ -12,13 +12,6 @@
 
 :root{
     --green:#1B4D3E;
-    --red:#E63946;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
 }
 
 body{
@@ -42,20 +35,18 @@ body{
 h1{
     color:var(--green);
     text-align:center;
-    margin-bottom:10px;
 }
 
 .subtitle{
     text-align:center;
     color:#666;
-    margin-bottom:25px;
+    margin:15px 0 25px;
 }
 
 .options{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:15px;
-    margin-bottom:25px;
 }
 
 .option{
@@ -64,52 +55,33 @@ h1{
     padding:15px;
 }
 
-.option input{
-    margin-right:10px;
-}
-
-.input-group{
-    margin-bottom:15px;
-}
-
-input[type="text"],
-input[type="tel"],
-textarea{
+input, textarea{
     width:100%;
     padding:12px;
     border:1px solid #ddd;
     border-radius:10px;
+    margin-top:15px;
     font-family:inherit;
 }
 
 textarea{
-    min-height:140px;
+    min-height:120px;
 }
 
 button{
     width:100%;
+    margin-top:20px;
     background:var(--green);
     color:white;
     border:none;
     padding:15px;
     border-radius:12px;
-    font-size:16px;
     cursor:pointer;
-}
-
-button:hover{
-    opacity:.95;
 }
 
 .success{
     display:none;
     text-align:center;
-    padding:25px;
-}
-
-.success h2{
-    color:var(--green);
-    margin-bottom:10px;
 }
 
 @media(max-width:700px){
@@ -129,80 +101,32 @@ button:hover{
 
 <div class="card" id="feedbackForm">
 
-<h1>Thank You For Your Feedback</h1>
+<h1>Help Us Improve</h1>
 
 <p class="subtitle">
-We appreciate your honesty. Please tell us how we can improve.
+Please tell us what could have been better.
 </p>
 
 <div class="options">
 
-<label class="option">
-<input type="checkbox" value="Waiting Time">
-Waiting Time
-</label>
-
-<label class="option">
-<input type="checkbox" value="Staff Behaviour">
-Staff Behaviour
-</label>
-
-<label class="option">
-<input type="checkbox" value="Billing Process">
-Billing Process
-</label>
-
-<label class="option">
-<input type="checkbox" value="Cleanliness">
-Cleanliness
-</label>
-
-<label class="option">
-<input type="checkbox" value="Doctor Availability">
-Doctor Availability
-</label>
-
-<label class="option">
-<input type="checkbox" value="Report Delay">
-Report Delay
-</label>
-
-<label class="option">
-<input type="checkbox" value="Communication">
-Communication
-</label>
-
-<label class="option">
-<input type="checkbox" value="Facilities">
-Facilities
-</label>
-
-<label class="option">
-<input type="checkbox" value="Other">
-Other
-</label>
+<label class="option"><input type="checkbox" value="Waiting Time"> Waiting Time</label>
+<label class="option"><input type="checkbox" value="Staff Behaviour"> Staff Behaviour</label>
+<label class="option"><input type="checkbox" value="Billing Process"> Billing Process</label>
+<label class="option"><input type="checkbox" value="Cleanliness"> Cleanliness</label>
+<label class="option"><input type="checkbox" value="Doctor Availability"> Doctor Availability</label>
+<label class="option"><input type="checkbox" value="Report Delay"> Report Delay</label>
+<label class="option"><input type="checkbox" value="Communication"> Communication</label>
+<label class="option"><input type="checkbox" value="Facilities"> Facilities</label>
+<label class="option"><input type="checkbox" value="Other"> Other</label>
 
 </div>
 
-<div class="input-group">
-<input
-type="text"
-id="name"
-placeholder="Your Name (Optional)">
-</div>
+<input type="text" id="name" placeholder="Name (Optional)">
+<input type="tel" id="phone" placeholder="Phone Number (Optional)">
 
-<div class="input-group">
-<input
-type="tel"
-id="phone"
-placeholder="Phone Number (Optional)">
-</div>
-
-<div class="input-group">
 <textarea
 id="comments"
 placeholder="Additional comments..."></textarea>
-</div>
 
 <button onclick="submitFeedback()">
 Submit Feedback
@@ -212,10 +136,10 @@ Submit Feedback
 
 <div class="card success" id="thankYou">
 
-<h2>Thank You</h2>
+<h1>Thank You</h1>
 
 <p>
-Your feedback has been recorded and will help us improve our services.
+Your feedback has been recorded successfully.
 </p>
 
 </div>
@@ -229,56 +153,34 @@ const SCRIPT_URL =
 
 async function submitFeedback(){
 
-    const rating =
-    localStorage.getItem("rating") || "";
+    const issues=[];
 
-    const issues = [];
-
-    document
-    .querySelectorAll('input[type="checkbox"]:checked')
-    .forEach(item=>{
+    document.querySelectorAll(
+    'input[type="checkbox"]:checked'
+    ).forEach(item=>{
         issues.push(item.value);
     });
 
-    const payload = {
+    const response = await fetch(SCRIPT_URL,{
+        method:"POST",
+        body:JSON.stringify({
+            rating:localStorage.getItem("rating"),
+            name:document.getElementById("name").value,
+            phone:document.getElementById("phone").value,
+            issues:issues.join(", "),
+            comments:document.getElementById("comments").value
+        })
+    });
 
-        rating: rating,
+    const result = await response.json();
 
-        name:
-        document.getElementById("name").value,
-
-        phone:
-        document.getElementById("phone").value,
-
-        issues:
-        issues.join(", "),
-
-        comments:
-        document.getElementById("comments").value
-
-    };
-
-    try{
-
-        await fetch(SCRIPT_URL,{
-            method:"POST",
-            body:JSON.stringify(payload)
-        });
+    if(result.success){
 
         document.getElementById("feedbackForm")
         .style.display="none";
 
         document.getElementById("thankYou")
         .style.display="block";
-
-    }
-    catch(error){
-
-        alert(
-        "Unable to submit feedback. Please try again."
-        );
-
-        console.log(error);
     }
 
 }
