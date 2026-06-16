@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Feedback - AAS Hospital</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --green:#1B4D3E;
+    --red:#E63946;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f7fafc;
+    padding:20px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+h1{
+    color:var(--green);
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+.options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.option{
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:15px;
+}
+
+.option input{
+    margin-right:10px;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+input[type="text"],
+input[type="tel"],
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-family:inherit;
+}
+
+textarea{
+    min-height:140px;
+}
+
+button{
+    width:100%;
+    background:var(--green);
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:12px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.95;
+}
+
+.success{
+    display:none;
+    text-align:center;
+    padding:25px;
+}
+
+.success h2{
+    color:var(--green);
+    margin-bottom:10px;
+}
+
+@media(max-width:700px){
+
+.options{
+    grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card" id="feedbackForm">
+
+<h1>Thank You For Your Feedback</h1>
+
+<p class="subtitle">
+We appreciate your honesty. Please tell us how we can improve.
+</p>
+
+<div class="options">
+
+<label class="option">
+<input type="checkbox" value="Waiting Time">
+Waiting Time
+</label>
+
+<label class="option">
+<input type="checkbox" value="Staff Behaviour">
+Staff Behaviour
+</label>
+
+<label class="option">
+<input type="checkbox" value="Billing Process">
+Billing Process
+</label>
+
+<label class="option">
+<input type="checkbox" value="Cleanliness">
+Cleanliness
+</label>
+
+<label class="option">
+<input type="checkbox" value="Doctor Availability">
+Doctor Availability
+</label>
+
+<label class="option">
+<input type="checkbox" value="Report Delay">
+Report Delay
+</label>
+
+<label class="option">
+<input type="checkbox" value="Communication">
+Communication
+</label>
+
+<label class="option">
+<input type="checkbox" value="Facilities">
+Facilities
+</label>
+
+<label class="option">
+<input type="checkbox" value="Other">
+Other
+</label>
+
+</div>
+
+<div class="input-group">
+<input
+type="text"
+id="name"
+placeholder="Your Name (Optional)">
+</div>
+
+<div class="input-group">
+<input
+type="tel"
+id="phone"
+placeholder="Phone Number (Optional)">
+</div>
+
+<div class="input-group">
+<textarea
+id="comments"
+placeholder="Additional comments..."></textarea>
+</div>
+
+<button onclick="submitFeedback()">
+Submit Feedback
+</button>
+
+</div>
+
+<div class="card success" id="thankYou">
+
+<h2>Thank You</h2>
+
+<p>
+Your feedback has been recorded and will help us improve our services.
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbw-pCWG_45x8cWkx8oozGAeazeR7XUrsbS3KBF6SH5gDqxovxMiSpSa5wuFrv0-ZQ4e/exec";
+
+async function submitFeedback(){
+
+    const rating =
+    localStorage.getItem("rating") || "";
+
+    const issues = [];
+
+    document
+    .querySelectorAll('input[type="checkbox"]:checked')
+    .forEach(item=>{
+        issues.push(item.value);
+    });
+
+    const payload = {
+
+        rating: rating,
+
+        name:
+        document.getElementById("name").value,
+
+        phone:
+        document.getElementById("phone").value,
+
+        issues:
+        issues.join(", "),
+
+        comments:
+        document.getElementById("comments").value
+
+    };
+
+    try{
+
+        await fetch(SCRIPT_URL,{
+            method:"POST",
+            body:JSON.stringify(payload)
+        });
+
+        document.getElementById("feedbackForm")
+        .style.display="none";
+
+        document.getElementById("thankYou")
+        .style.display="block";
+
+    }
+    catch(error){
+
+        alert(
+        "Unable to submit feedback. Please try again."
+        );
+
+        console.log(error);
+    }
+
+}
+
+</script>
+
+</body>
+</html>
