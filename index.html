@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AAS Hospital & Pathology</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -15,7 +14,7 @@
     --light-blue:#A7D8F0;
     --red:#E63946;
     --white:#ffffff;
-    --gray:#f5f7fa;
+    --bg:#f7fafc;
 }
 
 *{
@@ -26,186 +25,187 @@
 
 body{
     font-family:'Poppins',sans-serif;
-    background:#f8fbfd;
+    background:var(--bg);
     color:#222;
 }
 
 .container{
     width:95%;
-    max-width:1400px;
+    max-width:1200px;
     margin:auto;
 }
 
-/* ==========================
+/* ======================
    HERO SECTION
-========================== */
+====================== */
 
 .hero{
-    padding:40px 0;
-}
-
-.hero-card{
-    background:linear-gradient(135deg,#ffffff,#eef9ff);
+    background:linear-gradient(135deg,#ffffff,#eef8fd);
     border-radius:25px;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    align-items:center;
-}
-
-.hero-left{
-    padding:50px;
+    padding:25px;
+    margin:20px 0;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
 }
 
 .logo{
-    font-size:70px;
-    color:var(--green);
+    font-size:48px;
     font-weight:800;
-    margin-bottom:10px;
+    color:var(--green);
+    margin-bottom:5px;
 }
 
 .logo span{
     color:var(--red);
 }
 
-.hero-left h3{
-    color:#444;
+.hero h1{
+    color:var(--green);
+    font-size:30px;
     margin-bottom:10px;
 }
 
-.hero-left h1{
-    color:var(--green);
-    font-size:52px;
-    line-height:1.2;
-    margin-bottom:20px;
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:#555;
+    font-size:15px;
+    line-height:1.7;
 }
 
-.hero-left p{
-    font-size:18px;
-    line-height:1.8;
+/* ======================
+   RATING SECTION
+====================== */
+
+.rating-section{
+    background:white;
+    border-radius:25px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.rating-section h2{
+    color:var(--green);
+    margin-bottom:10px;
+    font-size:30px;
+}
+
+.rating-section p{
+    color:#666;
     margin-bottom:25px;
 }
 
-.badges{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-.badge{
-    background:white;
-    padding:12px 18px;
-    border-radius:50px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-    font-size:14px;
-    font-weight:600;
-}
-
-.hero-right img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-/* ==========================
-   FEATURES
-========================== */
-
-.features{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-    margin:30px 0;
-}
-
-.feature{
-    background:white;
-    padding:18px 25px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-    font-weight:600;
-}
-
-/* ==========================
-   REVIEW SECTION
-========================== */
-
-.review-section{
-    background:white;
-    border-radius:25px;
-    padding:40px;
-    margin-bottom:40px;
-    box-shadow:0 5px 20px rgba(0,0,0,.06);
-}
-
-.review-section h2{
-    text-align:center;
-    color:var(--green);
-    margin-bottom:10px;
-    font-size:38px;
-}
-
-.review-section p{
-    text-align:center;
-    color:#666;
-    margin-bottom:30px;
-}
-
-.review-grid{
+.rating-grid{
     display:grid;
     grid-template-columns:repeat(5,1fr);
-    gap:20px;
+    gap:15px;
 }
 
-.review-box{
+.rating-card{
     border:1px solid #ddd;
     border-radius:15px;
-    text-align:center;
-    padding:25px;
+    padding:20px;
+    cursor:pointer;
     transition:.3s;
+    background:white;
 }
 
-.review-box:hover{
+.rating-card:hover{
     transform:translateY(-5px);
+    border-color:var(--green);
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
 .stars{
+    font-size:24px;
     color:#f7b500;
-    font-size:28px;
     margin-bottom:10px;
 }
 
-/* ==========================
-   CONTENT SECTION
-========================== */
+.rating-card h3{
+    color:var(--green);
+}
+
+/* ======================
+   GOOGLE REVIEW BOX
+====================== */
+
+.google-box{
+    margin-top:25px;
+    background:linear-gradient(
+        135deg,
+        var(--green),
+        #235f4d
+    );
+    color:white;
+    border-radius:20px;
+    padding:25px;
+}
+
+.google-box h3{
+    margin-bottom:10px;
+}
+
+.google-btn{
+    display:inline-block;
+    margin-top:15px;
+    text-decoration:none;
+    background:white;
+    color:var(--green);
+    padding:14px 30px;
+    border-radius:40px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.google-btn:hover{
+    transform:scale(1.05);
+}
+
+/* ======================
+   HOSPITAL IMAGE
+====================== */
+
+.image-section{
+    margin-top:25px;
+}
+
+.image-section img{
+    width:100%;
+    border-radius:25px;
+    display:block;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+/* ======================
+   INFO SECTION
+====================== */
 
 .content{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:30px;
-    margin-bottom:40px;
+    gap:25px;
+    margin:30px 0;
 }
 
 .card{
     background:white;
-    border-radius:25px;
-    padding:35px;
-    box-shadow:0 5px 20px rgba(0,0,0,.06);
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
 }
 
 .card h2{
     color:var(--green);
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 .reason{
-    margin-bottom:25px;
+    margin-bottom:18px;
 }
 
-.reason h3{
+.reason h4{
     color:var(--green);
     margin-bottom:5px;
 }
@@ -214,107 +214,32 @@ body{
     color:#555;
 }
 
-/* ==========================
-   SPECIALITIES
-========================== */
-
 .specialities{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:15px;
+    gap:12px;
 }
 
 .speciality{
     background:#eef8fd;
+    padding:12px;
     border-radius:12px;
-    padding:15px;
     text-align:center;
     font-weight:600;
 }
 
-/* ==========================
-   TESTIMONIAL
-========================== */
-
 .testimonial{
-    margin-top:25px;
+    margin-top:20px;
     background:var(--green);
     color:white;
-    padding:25px;
+    padding:20px;
     border-radius:15px;
     text-align:center;
 }
 
-/* ==========================
-   GOOGLE REVIEW
-========================== */
-
-.google-section{
-    background:linear-gradient(
-    135deg,
-    var(--green),
-    #235f4d);
-    
-    color:white;
-    border-radius:25px;
-    padding:30px 40px;
-    margin-bottom:40px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:20px;
-}
-
-.google-section h2{
-    margin-bottom:10px;
-}
-
-.review-btn{
-    background:white;
-    color:var(--green);
-    text-decoration:none;
-    padding:15px 35px;
-    border-radius:50px;
-    font-weight:700;
-    transition:.3s;
-}
-
-.review-btn:hover{
-    transform:scale(1.05);
-}
-
-/* ==========================
-   SEARCH TAGS
-========================== */
-
-.search-section{
-    text-align:center;
-    margin-bottom:40px;
-}
-
-.search-section h2{
-    color:var(--green);
-    margin-bottom:20px;
-}
-
-.tags{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:12px;
-}
-
-.tag{
-    background:#eaf2f5;
-    padding:10px 20px;
-    border-radius:50px;
-}
-
-/* ==========================
+/* ======================
    FOOTER
-========================== */
+====================== */
 
 footer{
     background:var(--green);
@@ -325,316 +250,268 @@ footer{
 .footer{
     display:flex;
     justify-content:space-between;
-    flex-wrap:wrap;
+    align-items:center;
     gap:20px;
-    text-align:center;
+    flex-wrap:wrap;
 }
 
-/* ==========================
+/* ======================
    MOBILE
-========================== */
+====================== */
 
 @media(max-width:900px){
 
-.hero-card,
-.content{
-    grid-template-columns:1fr;
-}
+    .rating-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-.review-grid{
-    grid-template-columns:1fr 1fr;
-}
-
+    .content{
+        grid-template-columns:1fr;
+    }
 }
 
 @media(max-width:600px){
 
-.hero-left{
-    padding:30px;
-}
+    .logo{
+        font-size:38px;
+    }
 
-.logo{
-    font-size:50px;
-}
+    .hero h1{
+        font-size:24px;
+    }
 
-.hero-left h1{
-    font-size:34px;
-}
+    .rating-section h2{
+        font-size:24px;
+    }
 
-.review-grid{
-    grid-template-columns:1fr;
-}
+    .rating-grid{
+        grid-template-columns:1fr;
+    }
 
-.specialities{
-    grid-template-columns:1fr;
-}
+    .specialities{
+        grid-template-columns:1fr;
+    }
 
+    .footer{
+        flex-direction:column;
+        text-align:center;
+    }
 }
 
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
-<!-- HERO -->
+    <!-- HERO -->
 
-<section class="hero">
+    <section class="hero">
 
-<div class="hero-card">
+        <div class="logo">
+            आस<span>+</span>
+        </div>
 
-<div class="hero-left">
+        <h1>AAS Hospital & Pathology</h1>
 
-<div class="logo">
-आस<span>+</span>
-</div>
+        <p>
+            Your Health. Our Priority. Providing trusted healthcare,
+            advanced diagnostics, expert surgical care and compassionate
+            treatment in Wardha.
+        </p>
 
-<h3>Thank You For Choosing</h3>
+    </section>
 
-<h1>
-AAS Hospital<br>
-& Pathology
-</h1>
+    <!-- RATING SECTION -->
 
-<p>
-Your Health. Our Priority.
-We are committed to providing quality healthcare,
-accurate diagnostics, advanced treatment and
-compassionate patient care.
-</p>
+    <section class="rating-section">
 
-<div class="badges">
+        <h2>How Was Your Experience Today?</h2>
 
-<div class="badge">✓ Trusted Care</div>
-<div class="badge">✓ Advanced Facilities</div>
-<div class="badge">✓ Expert Team</div>
+        <p>
+            Please rate your visit. Your feedback helps us improve our services.
+        </p>
 
-</div>
+        <div class="rating-grid">
 
-</div>
+            <div class="rating-card" onclick="rate(5)">
+                <div class="stars">★★★★★</div>
+                <h3>Excellent</h3>
+            </div>
 
-<div class="hero-right">
+            <div class="rating-card" onclick="rate(4)">
+                <div class="stars">★★★★</div>
+                <h3>Very Good</h3>
+            </div>
 
-<img src="Aas Hospital Exterior.jpg"
-alt="AAS Hospital & Pathology">
+            <div class="rating-card" onclick="rate(3)">
+                <div class="stars">★★★</div>
+                <h3>Good</h3>
+            </div>
 
-</div>
+            <div class="rating-card" onclick="rate(2)">
+                <div class="stars">★★</div>
+                <h3>Average</h3>
+            </div>
 
-</div>
+            <div class="rating-card" onclick="rate(1)">
+                <div class="stars">★</div>
+                <h3>Poor</h3>
+            </div>
 
-</section>
+        </div>
 
-<!-- FEATURES -->
+        <div class="google-box">
 
-<section class="features">
+            <h3>⭐ Loved Our Care?</h3>
 
-<div class="feature">👨‍⚕️ Expert Doctors</div>
+            <p>
+                Share your experience on Google and help other patients
+                choose quality healthcare.
+            </p>
 
-<div class="feature">🔬 Advanced Technology</div>
+            <a
+                href="https://g.page/r/CZfxbPXREOsgEBM/review"
+                target="_blank"
+                class="google-btn">
 
-<div class="feature">❤️ Patient First Approach</div>
+                Review Us On Google
 
-</section>
+            </a>
 
-<!-- REVIEW -->
+        </div>
 
-<section class="review-section">
+    </section>
 
-<h2>How Was Your Experience With Us Today?</h2>
+    <!-- HOSPITAL IMAGE -->
 
-<p>
-Please take a moment to rate your experience.
-Your feedback helps us serve you better.
-</p>
+    <section class="image-section">
 
-<div class="review-grid">
+        <img
+            src="Aas Hospital Exterior.jpg"
+            alt="AAS Hospital & Pathology">
 
-<div class="review-box">
-<div class="stars">★★★★★</div>
-<h3>Excellent</h3>
-</div>
+    </section>
 
-<div class="review-box">
-<div class="stars">★★★★</div>
-<h3>Very Good</h3>
-</div>
+    <!-- CONTENT -->
 
-<div class="review-box">
-<div class="stars">★★★</div>
-<h3>Good</h3>
-</div>
+    <section class="content">
 
-<div class="review-box">
-<div class="stars">★★</div>
-<h3>Average</h3>
-</div>
+        <div class="card">
 
-<div class="review-box">
-<div class="stars">★</div>
-<h3>Poor</h3>
-</div>
+            <h2>Why Choose AAS Hospital?</h2>
 
-</div>
+            <div class="reason">
+                <h4>Experienced Specialists</h4>
+                <p>Dedicated doctors focused on quality healthcare.</p>
+            </div>
 
-</section>
+            <div class="reason">
+                <h4>Advanced Surgical Care</h4>
+                <p>Modern techniques with personalized treatment.</p>
+            </div>
 
-<!-- CONTENT -->
+            <div class="reason">
+                <h4>Accurate Pathology Services</h4>
+                <p>Reliable and fast diagnostic reporting.</p>
+            </div>
 
-<section class="content">
+            <div class="reason">
+                <h4>Modern Infrastructure</h4>
+                <p>Clean and comfortable healthcare environment.</p>
+            </div>
 
-<div class="card">
+            <div class="reason">
+                <h4>Patient First Approach</h4>
+                <p>Compassionate, ethical and affordable care.</p>
+            </div>
 
-<h2>Why Choose AAS Hospital & Pathology?</h2>
+        </div>
 
-<div class="reason">
-<h3>Experienced Specialists</h3>
-<p>Expert medical professionals dedicated to quality healthcare.</p>
-</div>
+        <div class="card">
 
-<div class="reason">
-<h3>Advanced Surgical Care</h3>
-<p>Modern surgical techniques with patient-focused treatment.</p>
-</div>
+            <h2>Our Specialities</h2>
 
-<div class="reason">
-<h3>Accurate Pathology Lab</h3>
-<p>Reliable reports with advanced diagnostic technology.</p>
-</div>
+            <div class="specialities">
 
-<div class="reason">
-<h3>Modern Infrastructure</h3>
-<p>Clean, comfortable and fully equipped facilities.</p>
-</div>
+                <div class="speciality">General Surgery</div>
+                <div class="speciality">Laparoscopic Surgery</div>
+                <div class="speciality">Surgical Oncology</div>
+                <div class="speciality">Pathology</div>
+                <div class="speciality">Cytopathology</div>
+                <div class="speciality">General Medicine</div>
+                <div class="speciality">Health Checkups</div>
+                <div class="speciality">Emergency Care</div>
 
-<div class="reason">
-<h3>Patient First Approach</h3>
-<p>Compassionate care, transparency and affordability.</p>
-</div>
+            </div>
 
-</div>
+            <div class="testimonial">
 
-<div class="card">
+                <div class="stars">★★★★★</div>
 
-<h2>Our Specialities</h2>
+                <p>
+                    Excellent hospital with supportive staff,
+                    experienced doctors and accurate pathology services.
+                </p>
 
-<div class="specialities">
+                <br>
 
-<div class="speciality">General Surgery</div>
+                <strong>– Happy Patient</strong>
 
-<div class="speciality">Laparoscopic Surgery</div>
+            </div>
 
-<div class="speciality">Surgical Oncology</div>
+        </div>
 
-<div class="speciality">Pathology</div>
-
-<div class="speciality">Cytopathology</div>
-
-<div class="speciality">General Medicine</div>
-
-<div class="speciality">Health Checkups</div>
-
-<div class="speciality">Emergency Care</div>
-
-</div>
-
-<div class="testimonial">
-
-<div class="stars">★★★★★</div>
-
-<p>
-Excellent hospital with skilled doctors,
-supportive staff and accurate pathology services.
-Highly recommended!
-</p>
-
-<br>
-
-<strong>— A Happy Patient</strong>
+    </section>
 
 </div>
-
-</div>
-
-</section>
-
-<!-- GOOGLE REVIEW -->
-
-<section class="google-section">
-
-<div>
-
-<h2>Loved Our Care?</h2>
-
-<p>
-Share your experience on Google and help others choose the best care.
-</p>
-
-</div>
-
-<a href="https://g.page/r/CZfxbPXREOsgEBM/review"
-target="_blank"
-class="review-btn">
-
-Review Us On Google
-
-</a>
-
-</section>
-
-<!-- SEARCHES -->
-
-<section class="search-section">
-
-<h2>Top Searches In Wardha</h2>
-
-<div class="tags">
-
-<div class="tag">Best Hospital in Wardha</div>
-
-<div class="tag">Best Doctor in Wardha</div>
-
-<div class="tag">Best Surgeon in Wardha</div>
-
-<div class="tag">Best Pathology Lab in Wardha</div>
-
-<div class="tag">Multispeciality Hospital</div>
-
-<div class="tag">Emergency Care Hospital</div>
-
-<div class="tag">Advanced Pathology Services</div>
-
-</div>
-
-</section>
-
-</div>
-
-<!-- FOOTER -->
 
 <footer>
 
-<div class="container">
+    <div class="container">
 
-<div class="footer">
+        <div class="footer">
 
-<div>
-📞 +91-7709296776
-</div>
+            <div>
+                📞 +91-7709296776
+            </div>
 
-<div>
-📍 Gandhinagar, Arvi Road,<br>
-Beside Saundarya Tiles, Wardha
-</div>
+            <div>
+                📍 Gandhinagar, Arvi Road,<br>
+                Beside Saundarya Tiles, Wardha
+            </div>
 
-<div>
-🏥 AAS Hospital & Pathology
-</div>
+            <div>
+                🏥 AAS Hospital & Pathology
+            </div>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </footer>
+
+<script>
+
+function rate(stars){
+
+    if(stars >= 4){
+
+        window.location.href =
+        "https://g.page/r/CZfxbPXREOsgEBM/review";
+
+    }else{
+
+        // Create feedback.html later
+        window.location.href =
+        "feedback.html";
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>
