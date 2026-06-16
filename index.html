@@ -1,261 +1,495 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AAS Hospital & Pathology</title>
+    <title>AAS Hospital & Pathology</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-<style>
+    <style>
+        :root {
+            --green: #1B4D3E;
+            --light-blue: #A7D8F0;
+            --red: #E63946;
+        }
 
-:root{
-    --green:#1B4D3E;
-    --light-blue:#A7D8F0;
-    --red:#E63946;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        body {
 
-body{
-    font-family:'Poppins',sans-serif;
-    background:#f7fafc;
-    color:#222;
-}
+            font-family: 'Poppins', sans-serif;
 
-.container{
-    width:95%;
-    max-width:1200px;
-    margin:auto;
-}
+            background:
+                linear-gradient(180deg,
+                    #D1ECF1 0%,
+                    #f8fbfc 40%,
+                    #ffffff 100%);
 
-.hero{
-    background:linear-gradient(135deg,#ffffff,#eef8fd);
-    border-radius:25px;
-    padding:25px;
-    margin:20px 0;
-    text-align:center;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
+            color: #222;
 
-.logo{
-    margin-top:25px;
-}
+        }
 
-.logo img{
-    width:100%;
-    border-radius:25px;
-}
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: auto;
+        }
 
-.hero h1{
-    color:var(--green);
-    margin-top:10px;
-}
+        .hero {
 
-.hero p{
-    margin-top:10px;
-    color:#555;
-}
+            background: white;
 
-.rating-section{
-    background:white;
-    border-radius:25px;
-    padding:30px;
-    text-align:center;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
+            border-radius: 30px;
 
-.rating-section h2{
-    color:var(--green);
-    margin-bottom:10px;
-}
+            overflow: hidden;
 
-.rating-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:15px;
-    margin-top:25px;
-}
+            border-top:
+                6px solid #005A63;
 
-.rating-card{
-    border:1px solid #ddd;
-    border-radius:15px;
-    padding:20px;
-    cursor:pointer;
-    transition:.3s;
-}
+            box-shadow:
+                0 20px 45px rgba(0, 90, 99, .10);
 
-.rating-card:hover{
-    transform:translateY(-5px);
-    border-color:var(--green);
-}
+        }
 
-.stars{
-    color:#f7b500;
-    font-size:24px;
-    margin-bottom:10px;
-}
+        .hero-image img {
 
-.image-section{
-    margin-top:25px;
-}
+            width: 100%;
 
-.image-section img{
-    width:100%;
-    border-radius:25px;
-}
+            height: 380px;
 
-footer{
-    margin-top:30px;
-    background:var(--green);
-    color:white;
-    padding:20px;
-}
+            object-fit: cover;
 
-.footer{
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:15px;
-}
+            object-position: top center;
 
-@media(max-width:768px){
+            display: block;
 
-.rating-grid{
-    grid-template-columns:1fr;
-}
+        }
 
-.footer{
-    flex-direction:column;
-    text-align:center;
-}
+        .hero-content {
 
-}
+            padding: 30px;
 
-</style>
+            text-align: center;
+
+        }
+
+        .badge {
+
+            display: inline-block;
+            background: #D1ECF1;
+            color: #005A63;
+            border: 1px solid rgba(0, 90, 99, .15);
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+
+            color: var(--green);
+
+            font-size: 36px;
+
+            margin-bottom: 15px;
+
+        }
+
+        .hero h1 span {
+
+            color: #EA1B23;
+
+        }
+
+        .hero p {
+
+            color: #555;
+
+            max-width: 700px;
+
+            margin: auto;
+
+            line-height: 1.8;
+
+        }
+
+        .hero-info {
+
+            margin-top: 20px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 30px;
+
+            flex-wrap: wrap;
+
+            font-weight: 500;
+
+        }
+
+        .logo {
+            margin-top: 25px;
+        }
+
+        .logo img {
+            width: 100%;
+            border-radius: 25px;
+        }
+
+        .hero-logo {
+
+            margin-bottom: 18px;
+
+        }
+
+        .hero-logo img {
+
+            width: 120px;
+
+            height: auto;
+
+        }
+
+        .hero h1 {
+
+            color: #005A63;
+
+            font-size: 42px;
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+
+        }
+
+        .hero p {
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .rating-section {
+
+            background: white;
+
+            border-radius: 30px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, .08);
+
+        }
+
+        .rating-section h2 {
+            color: var(--green);
+            margin-bottom: 10px;
+        }
+
+        .rating-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .rating-card {
+
+            background: white;
+
+            border: 2px solid #edf2f7;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            cursor: pointer;
+
+            transition: .25s ease;
+
+        }
+
+        .rating-card:hover {
+
+            transform:
+                translateY(-8px) scale(1.02);
+
+            border-color: #005A63;
+
+            box-shadow:
+                0 20px 40px rgba(0, 90, 99, .15);
+
+        }
+
+        .rating-card h3 {
+
+            margin-top: 10px;
+
+            color: var(--green);
+
+        }
+
+        .rating-card p {
+
+            margin-top: 8px;
+
+            color: #666;
+
+            font-size: 14px;
+
+        }
+
+        .emoji {
+
+            font-size: 34px;
+
+            margin-bottom: 10px;
+
+        }
+
+        .stars {
+
+            font-size: 28px;
+
+        }
+
+        .excellent {
+
+            border-top:
+                5px solid #005A63;
+
+        }
+
+        .good {
+
+            border-top:
+                5px solid #3B82F6;
+
+        }
+
+        .average {
+
+            border-top:
+                5px solid #F59E0B;
+
+        }
+
+        .poor {
+
+            border-top:
+                5px solid #EA1B23;
+
+        }
+
+        .bad {
+
+            border-top:
+                5px solid #B91C1C;
+
+        }
+
+        .image-section {
+            margin-top: 25px;
+        }
+
+
+        .image-section img {
+            width: 100%;
+            border-radius: 25px;
+        }
+
+        footer {
+
+            background: #005A63;
+
+            color: white;
+
+            margin-top: 40px;
+
+            padding: 30px;
+
+        }
+
+        .footer div {
+
+            font-weight: 500;
+
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        @media(max-width:768px) {
+
+            .rating-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-<section class="hero">
+        <section class="hero">
 
-<div class="logo">
-<img
-src="Aas Logo.png"
-alt="AAS Hospital & Pathology">
-</div>
+            <div class="hero-image">
+                <img src="Aas Hospital Exterior.jpg" alt="AAS Hospital & Pathology">
+            </div>
 
-<h1>AAS Hospital & Pathology</h1>
+            <div class="hero-content">
 
-<p>
-Your Health. Our Priority.
-Providing trusted healthcare, advanced diagnostics,
-expert surgical care and compassionate treatment.
-</p>
+                <div class="badge">
+                    ⭐ Trusted Healthcare in Wardha
+                </div>
+                <div class="hero-logo">
+                    <img src="Aas Logo.png" alt="AAS Logo">
+                </div>
+                <h1>
+                    AAS Hospital
+                    <span>& Pathology</span>
+                </h1>
 
-</section>
+                <p>
+                    Providing advanced diagnostics, expert surgical care,
+                    compassionate treatment and trusted healthcare services
+                    for patients across Wardha.
+                </p>
 
-<section class="rating-section">
+                <div class="hero-info">
 
-<h2>How Was Your Experience Today?</h2>
+                    <div>
+                        📞 +91-7709296776
+                    </div>
 
-<p>Select a rating to continue.</p>
+                    <div>
+                        📍 Gandhinagar, Arvi Road, Wardha
+                    </div>
 
-<div class="rating-grid">
+                </div>
 
-<div class="rating-card" onclick="fiveStar()">
-<div class="stars">★★★★★</div>
-<h3>Excellent</h3>
-</div>
+            </div>
 
-<div class="rating-card" onclick="feedback(4)">
-<div class="stars">★★★★</div>
-<h3>Very Good</h3>
-</div>
+        </section>
 
-<div class="rating-card" onclick="feedback(3)">
-<div class="stars">★★★</div>
-<h3>Good</h3>
-</div>
+        <section class="rating-section">
 
-<div class="rating-card" onclick="feedback(2)">
-<div class="stars">★★</div>
-<h3>Average</h3>
-</div>
+            <h2>How Was Your Experience Today?</h2>
 
-<div class="rating-card" onclick="feedback(1)">
-<div class="stars">★</div>
-<h3>Poor</h3>
-</div>
+            <p>Select a rating to continue.</p>
 
-</div>
+            <div class="rating-grid">
 
-</section>
+                <div class="rating-card excellent" onclick="fiveStar()">
+                    <div class="emoji">😍</div>
+                    <div class="stars">★★★★★</div>
+                    <h3>Excellent</h3>
+                    <p>Exceeded expectations</p>
+                </div>
 
-<section class="image-section">
+                <div class="rating-card good" onclick="feedback(4)">
+                    <div class="emoji">😊</div>
+                    <div class="stars">★★★★</div>
+                    <h3>Very Good</h3>
+                    <p>Mostly satisfied</p>
+                </div>
 
-<img
-src="Aas Hospital Exterior.jpg"
-alt="AAS Hospital & Pathology">
+                <div class="rating-card average" onclick="feedback(3)">
+                    <div class="emoji">🙂</div>
+                    <div class="stars">★★★</div>
+                    <h3>Good</h3>
+                    <p>Room for improvement</p>
+                </div>
 
-</section>
+                <div class="rating-card poor" onclick="feedback(2)">
+                    <div class="emoji">😕</div>
+                    <div class="stars">★★</div>
+                    <h3>Average</h3>
+                    <p>Could be better</p>
+                </div>
 
-</div>
+                <div class="rating-card bad" onclick="feedback(1)">
+                    <div class="emoji">😞</div>
+                    <div class="stars">★</div>
+                    <h3>Poor</h3>
+                    <p>Needs improvement</p>
+                </div>
 
-<footer>
+            </div>
 
-<div class="container">
+        </section>
 
-<div class="footer">
+    </div>
 
-<div>
-📞 +91-7709296776
-</div>
+    <footer>
 
-<div>
-📍 Gandhinagar, Arvi Road,
-Beside Saundarya Tiles, Wardha
-</div>
+        <div class="container">
 
-<div>
-🏥 AAS Hospital & Pathology
-</div>
+            <div class="footer">
 
-</div>
+                <div>
+                    📞 +91-7709296776
+                </div>
 
-</div>
+                <div>
+                    📍 Gandhinagar, Arvi Road,
+                    Beside Saundarya Tiles, Wardha
+                </div>
 
-</footer>
+                <div>
+                    🏥 AAS Hospital & Pathology
+                </div>
 
-<script>
+            </div>
 
-function fiveStar(){
+        </div>
 
-    localStorage.setItem("rating","5");
+    </footer>
 
-    window.location.href =
-    "review-generator.html";
+    <script>
 
-}
+        function fiveStar() {
 
-function feedback(rating){
+            localStorage.setItem("rating", "5");
 
-    localStorage.setItem("rating",rating);
+            window.location.href =
+                "review-generator.html";
 
-    window.location.href =
-    "feedback.html";
+        }
 
-}
+        function feedback(rating) {
 
-</script>
+            localStorage.setItem("rating", rating);
+
+            window.location.href =
+                "feedback.html";
+
+        }
+
+    </script>
 
 </body>
+
 </html>
 ```
