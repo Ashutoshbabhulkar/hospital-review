@@ -12,9 +12,10 @@
 
     <style>
         :root {
-            --green: #1B4D3E;
-            --light-blue: #A7D8F0;
-            --red: #E63946;
+            --primary: #005A63;
+            --secondary: #D1ECF1;
+            --accent: #EA1B23;
+            --text: #222;
         }
 
         * {
@@ -30,32 +31,37 @@
             background:
                 linear-gradient(180deg,
                     #D1ECF1 0%,
-                    #f8fbfc 40%,
-                    #ffffff 100%);
+                    #F8FBFC 45%,
+                    #FFFFFF 100%);
 
-            color: #222;
+            color: var(--text);
+
+            padding: 15px 0 40px;
 
         }
 
         .container {
-            width: 95%;
-            max-width: 1200px;
+
+            width: 92%;
+
+            max-width: 520px;
+
             margin: auto;
+
         }
 
         .hero {
 
             background: white;
 
-            border-radius: 30px;
+            border-radius: 24px;
 
             overflow: hidden;
 
-            border-top:
-                6px solid #005A63;
+            border-top: 6px solid var(--primary);
 
             box-shadow:
-                0 20px 45px rgba(0, 90, 99, .10);
+                0 15px 40px rgba(0, 90, 99, .12);
 
         }
 
@@ -63,7 +69,7 @@
 
             width: 100%;
 
-            height: 380px;
+            height: 220px;
 
             object-fit: cover;
 
@@ -75,38 +81,65 @@
 
         .hero-content {
 
-            padding: 30px;
+            padding: 22px 20px;
 
             text-align: center;
+
+        }
+
+        .hero-logo {
+
+            margin-bottom: 15px;
+
+        }
+
+        .hero-logo img {
+
+            width: 90px;
+
+            height: auto;
 
         }
 
         .badge {
 
             display: inline-block;
-            background: #D1ECF1;
-            color: #005A63;
+
+            background: var(--secondary);
+
+            color: var(--primary);
+
             border: 1px solid rgba(0, 90, 99, .15);
-            padding: 10px 18px;
+
+            padding: 8px 14px;
+
             border-radius: 999px;
-            font-size: 14px;
+
+            font-size: 12px;
+
             font-weight: 600;
+
             margin-bottom: 15px;
+
         }
 
         .hero h1 {
 
-            color: var(--green);
+            color: var(--primary);
 
-            font-size: 36px;
+            font-size: 28px;
 
-            margin-bottom: 15px;
+            font-weight: 800;
+
+            line-height: 1.2;
+
+            margin-bottom: 10px;
 
         }
 
         .hero h1 span {
 
-            color: #EA1B23;
+            color: var(--accent);
 
         }
 
@@ -114,134 +147,58 @@
 
             color: #555;
 
-            max-width: 700px;
+            font-size: 14px;
 
-            margin: auto;
-
-            line-height: 1.8;
+            line-height: 1.7;
 
         }
 
         .hero-info {
 
-            margin-top: 20px;
+            margin-top: 18px;
 
             display: flex;
 
-            justify-content: center;
+            flex-direction: column;
 
-            gap: 30px;
+            gap: 10px;
 
-            flex-wrap: wrap;
+            font-size: 14px;
 
             font-weight: 500;
 
-        }
-
-        .logo {
-            margin-top: 25px;
-        }
-
-        .logo img {
-            width: 100%;
-            border-radius: 25px;
-        }
-
-        .hero-logo {
-
-            margin-bottom: 18px;
-
-        }
-
-        .hero-logo img {
-
-            width: 120px;
-
-            height: auto;
-
-        }
-
-        .hero h1 {
-
-            color: #005A63;
-
-            font-size: 42px;
-
-            font-weight: 800;
-
-            letter-spacing: -1px;
-
-        }
-
-        .hero p {
-            margin-top: 10px;
-            color: #555;
         }
 
         .rating-section {
 
             background: white;
 
-            border-radius: 30px;
+            border-radius: 24px;
 
-            padding: 35px;
+            padding: 22px 18px;
+
+            margin-top: 20px;
 
             box-shadow:
-                0 15px 40px rgba(0, 0, 0, .08);
+                0 12px 30px rgba(0, 0, 0, .08);
 
         }
 
         .rating-section h2 {
-            color: var(--green);
-            margin-bottom: 10px;
-        }
 
-        .rating-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-            margin-top: 25px;
-        }
+            text-align: center;
 
-        .rating-card {
+            color: var(--primary);
 
-            background: white;
+            font-size: 24px;
 
-            border: 2px solid #edf2f7;
-
-            border-radius: 20px;
-
-            padding: 25px;
-
-            cursor: pointer;
-
-            transition: .25s ease;
+            margin-bottom: 8px;
 
         }
 
-        .rating-card:hover {
+        .rating-section p {
 
-            transform:
-                translateY(-8px) scale(1.02);
-
-            border-color: #005A63;
-
-            box-shadow:
-                0 20px 40px rgba(0, 90, 99, .15);
-
-        }
-
-        .rating-card h3 {
-
-            margin-top: 10px;
-
-            color: var(--green);
-
-        }
-
-        .rating-card p {
-
-            margin-top: 8px;
+            text-align: center;
 
             color: #666;
 
@@ -249,63 +206,109 @@
 
         }
 
+        .rating-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 12px;
+
+            margin-top: 20px;
+
+        }
+
+        .rating-card {
+
+            background: white;
+
+            border: 2px solid #EDF2F7;
+
+            border-radius: 18px;
+
+            padding: 18px;
+
+            cursor: pointer;
+
+            transition: .25s;
+
+            text-align: center;
+
+        }
+
+        .rating-card:hover {
+
+            transform: translateY(-3px);
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 10px 20px rgba(0, 90, 99, .12);
+
+        }
+
+        .rating-card h3 {
+
+            color: var(--primary);
+
+            margin-top: 8px;
+
+            font-size: 18px;
+
+        }
+
+        .rating-card p {
+
+            margin-top: 4px;
+
+            font-size: 13px;
+
+            color: #666;
+
+        }
+
         .emoji {
 
-            font-size: 34px;
-
-            margin-bottom: 10px;
+            font-size: 30px;
 
         }
 
         .stars {
 
-            font-size: 28px;
+            font-size: 22px;
+
+            color: #f7b500;
 
         }
 
         .excellent {
 
-            border-top:
-                5px solid #005A63;
+            border-left: 5px solid #005A63;
 
         }
 
         .good {
 
-            border-top:
-                5px solid #3B82F6;
+            border-left: 5px solid #3B82F6;
 
         }
 
         .average {
 
-            border-top:
-                5px solid #F59E0B;
+            border-left: 5px solid #F59E0B;
 
         }
 
         .poor {
 
-            border-top:
-                5px solid #EA1B23;
+            border-left: 5px solid #EA1B23;
 
         }
 
         .bad {
 
-            border-top:
-                5px solid #B91C1C;
+            border-left: 5px solid #B91C1C;
 
-        }
-
-        .image-section {
-            margin-top: 25px;
-        }
-
-
-        .image-section img {
-            width: 100%;
-            border-radius: 25px;
         }
 
         footer {
@@ -314,35 +317,118 @@
 
             color: white;
 
-            margin-top: 40px;
+            margin-top: 25px;
 
-            padding: 30px;
+            padding: 20px;
+
+            border-radius: 24px 24px 0 0;
+
+        }
+
+        .footer {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+            text-align: center;
 
         }
 
         .footer div {
 
+            font-size: 14px;
+
             font-weight: 500;
 
         }
 
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
+        .star:hover {
+
+            transform: scale(1.1);
+
         }
 
-        @media(max-width:768px) {
+        .rating-box {
 
-            .rating-grid {
-                grid-template-columns: 1fr;
-            }
+            background: white;
 
-            .footer {
-                flex-direction: column;
-                text-align: center;
-            }
+            border-radius: 24px;
+
+            padding: 30px 20px;
+
+            margin-top: 20px;
+
+            text-align: center;
+
+            transition: .3s;
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, .08);
+
+        }
+
+        .rating-box.poor {
+
+            background: #FEE2E2;
+
+        }
+
+        .rating-box.average {
+
+            background: #FEF3C7;
+
+        }
+
+        .rating-box.good {
+
+            background: #E0F2FE;
+
+        }
+
+        .rating-box.verygood {
+
+            background: #D1ECF1;
+
+        }
+
+        .rating-box.excellent {
+
+            background: #DCFCE7;
+
+        }
+
+        .star-rating {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+
+        }
+
+        .star {
+
+            font-size: 52px;
+
+            color: #D1D5DB;
+
+            cursor: pointer;
+
+            transition: .2s;
+
+        }
+
+        .star.active {
+
+            color: #F7B500;
+
+            transform: scale(1.1);
 
         }
     </style>
@@ -399,42 +485,21 @@
 
             <p>Select a rating to continue.</p>
 
-            <div class="rating-grid">
+            <div class="rating-box" id="ratingBox">
 
-                <div class="rating-card excellent" onclick="fiveStar()">
-                    <div class="emoji">😍</div>
-                    <div class="stars">★★★★★</div>
-                    <h3>Excellent</h3>
-                    <p>Exceeded expectations</p>
+                <div class="star-rating">
+
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+
                 </div>
 
-                <div class="rating-card good" onclick="feedback(4)">
-                    <div class="emoji">😊</div>
-                    <div class="stars">★★★★</div>
-                    <h3>Very Good</h3>
-                    <p>Mostly satisfied</p>
-                </div>
-
-                <div class="rating-card average" onclick="feedback(3)">
-                    <div class="emoji">🙂</div>
-                    <div class="stars">★★★</div>
-                    <h3>Good</h3>
-                    <p>Room for improvement</p>
-                </div>
-
-                <div class="rating-card poor" onclick="feedback(2)">
-                    <div class="emoji">😕</div>
-                    <div class="stars">★★</div>
-                    <h3>Average</h3>
-                    <p>Could be better</p>
-                </div>
-
-                <div class="rating-card bad" onclick="feedback(1)">
-                    <div class="emoji">😞</div>
-                    <div class="stars">★</div>
-                    <h3>Poor</h3>
-                    <p>Needs improvement</p>
-                </div>
+                <h2 id="ratingLabel">
+                    ⭐ Tap a star to rate your experience
+                </h2>
 
             </div>
 
@@ -469,27 +534,220 @@
 
     <script>
 
-        function fiveStar() {
+        const stars =
+            document.querySelectorAll(".star");
 
-            localStorage.setItem("rating", "5");
+        const label =
+            document.getElementById(
+                "ratingLabel"
+            );
 
-            window.location.href =
-                "review-generator.html";
+        const labels = {
+
+            1: "😞 Poor",
+            2: "😕 Average",
+            3: "🙂 Good",
+            4: "😊 Very Good",
+            5: "😍 Excellent! Thank You!"
+        };
+
+        let selected = 0;
+
+        stars.forEach(star => {
+
+            star.addEventListener(
+                "mouseover",
+                function () {
+
+                    const value =
+                        parseInt(
+                            this.dataset.rating
+                        );
+
+                    paintStars(value);
+                    paintCard(value);
+
+                    label.textContent =
+                        labels[value];
+
+                });
+
+            star.addEventListener(
+                "click",
+                function () {
+
+                    selected =
+                        parseInt(
+                            this.dataset.rating
+                        );
+
+                    paintStars(selected);
+                    paintCard(selected);
+
+                    label.textContent =
+                        labels[selected];
+
+                    setTimeout(() => {
+
+                        if (selected === 5) {
+
+                            localStorage.setItem(
+                                "rating",
+                                "5"
+                            );
+
+                            confetti({
+                                particleCount: 120,
+                                spread: 80,
+                                origin: { y: 0.6 },
+                                colors: [
+                                    "#005A63",
+                                    "#EA1B23",
+                                    "#D1ECF1",
+                                    "#F7B500"
+                                ]
+                            });
+
+                            setTimeout(() => {
+
+                                confetti({
+                                    particleCount: 80,
+                                    spread: 120,
+                                    origin: { y: 0.4 },
+                                    colors: [
+                                        "#005A63",
+                                        "#EA1B23"
+                                    ]
+                                });
+
+                            }, 300);
+
+                            setTimeout(() => {
+
+                                window.location.href =
+                                    "review-generator.html";
+
+                            }, 1500);
+
+                        } else {
+
+                            localStorage.setItem(
+                                "rating",
+                                selected
+                            );
+
+                            window.location.href =
+                                "feedback.html";
+
+                        }
+
+                    }, 100);
+
+                });
+
+        });
+
+        document
+            .querySelector(".star-rating")
+            .addEventListener(
+                "mouseleave",
+                function () {
+
+                    paintStars(selected);
+
+                    if (selected) {
+
+                        label.textContent =
+                            labels[selected];
+
+                    } else {
+
+                        label.textContent =
+                            "Select Rating";
+
+                    }
+
+                });
+        function paintCard(value) {
+
+            const box =
+                document.getElementById(
+                    "ratingBox"
+                );
+
+            box.className =
+                "rating-box";
+
+            if (value === 1) {
+
+                box.classList.add(
+                    "poor"
+                );
+
+            }
+
+            if (value === 2) {
+
+                box.classList.add(
+                    "average"
+                );
+
+            }
+
+            if (value === 3) {
+
+                box.classList.add(
+                    "good"
+                );
+
+            }
+
+            if (value === 4) {
+
+                box.classList.add(
+                    "verygood"
+                );
+
+            }
+
+            if (value === 5) {
+
+                box.classList.add(
+                    "excellent"
+                );
+
+            }
 
         }
+        function paintStars(value) {
 
-        function feedback(rating) {
+            stars.forEach(star => {
 
-            localStorage.setItem("rating", rating);
+                const r =
+                    parseInt(
+                        star.dataset.rating
+                    );
 
-            window.location.href =
-                "feedback.html";
+                if (r <= value) {
+
+                    star.classList.add(
+                        "active"
+                    );
+
+                } else {
+
+                    star.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            });
 
         }
 
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </body>
 
 </html>
-```
