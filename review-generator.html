@@ -13,7 +13,8 @@
                     #D1ECF1 0%,
                     #F8FBFC 50%,
                     #FFFFFF 100%);
-            padding: 20px
+            padding: 20px;
+            padding-bottom: 80px;
         }
 
         .wrap {
@@ -22,32 +23,37 @@
             background: #fff;
             padding: 25px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .08)
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
         }
 
         h1 {
             text-align: center;
-            color: #1B4D3E
+            color: #1B4D3E;
         }
 
         .grid {
+
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 10px
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
         }
 
         label {
             border: 1px solid #ddd;
             padding: 12px;
             border-radius: 12px;
-            display: block
+            display: block;
         }
 
         button {
             padding: 14px;
             border: none;
             border-radius: 12px;
-            cursor: pointer
+            cursor: pointer;
         }
 
         .primary {
@@ -63,6 +69,11 @@
             font-weight: 700;
 
             transition: .25s;
+            padding: 18px;
+
+            font-size: 17px;
+
+            font-weight: 700;
 
         }
 
@@ -159,9 +170,9 @@
 
             border-radius: 20px;
 
-            padding: 22px;
+            padding: 14px;
 
-            min-height: 100px;
+            min-height: 82px;
 
             display: flex;
 
@@ -246,11 +257,23 @@
 
         .card-title {
 
+            font-size: 13px;
+
+            line-height: 1.4;
+
             font-weight: 600;
 
-            color: #005A63;
+        }
 
-            text-align: center;
+        .generate-wrap {
+
+            position: sticky;
+
+            bottom: 12px;
+
+            z-index: 100;
+
+            margin-top: 20px;
 
         }
 
@@ -289,6 +312,195 @@
             font-weight: 500;
 
         }
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 0, 0, .6);
+
+            z-index: 9999;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+        }
+
+        .modal-content {
+
+            background: white;
+
+            border-radius: 24px;
+
+            padding: 30px;
+
+            width: 100%;
+
+            max-width: 360px;
+
+            text-align: center;
+
+            animation: popup .25s ease;
+
+            border-top: 6px solid #EA1B23;
+
+        }
+
+        @keyframes popup {
+
+            from {
+                transform: scale(.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+        }
+
+        .modal-icon {
+
+            font-size: 60px;
+
+            margin-bottom: 15px;
+
+        }
+
+        .modal-content h2 {
+
+            color: #005A63;
+
+            margin-bottom: 12px;
+
+        }
+
+        .modal-content p {
+
+            color: #555;
+
+            margin-bottom: 18px;
+
+        }
+
+        .steps {
+
+            text-align: left;
+
+            background: #D1ECF1;
+
+            padding: 15px;
+
+            border-radius: 16px;
+
+            margin-bottom: 20px;
+
+            line-height: 1.8;
+
+        }
+
+        #continueBtn {
+
+            width: 100%;
+
+            border: none;
+
+            background: #EA1B23;
+
+            color: white;
+
+            padding: 16px;
+
+            border-radius: 14px;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+        }
+
+        @media(max-width:768px) {
+
+            body {
+                padding: 12px;
+            }
+
+            .hero-review {
+
+                text-align: center;
+
+                background:
+                    linear-gradient(135deg,
+                        #ffffff,
+                        #D1ECF1);
+
+                padding: 24px 16px;
+
+                border-radius: 24px;
+
+                margin-bottom: 18px;
+
+                border-top: 6px solid #005A63;
+
+            }
+
+            .hero-logo img {
+
+                width: 80px;
+
+                height: auto;
+
+            }
+
+            .hero-subtitle {
+
+                color: #555;
+
+                font-size: 16px;
+
+                margin-top: 10px;
+
+            }
+
+            .wrap {
+                padding: 18px;
+                border-radius: 18px;
+            }
+
+            .option-card {
+                min-height: 80px;
+                padding: 15px;
+            }
+
+            .card-title {
+                font-size: 14px;
+            }
+
+            textarea {
+
+                min-height: 180px;
+
+                font-size: 15px;
+
+                line-height: 1.8;
+
+            }
+
+            .modal-content {
+                padding: 22px;
+            }
+
+        }
     </style>
 </head>
 
@@ -300,24 +512,33 @@
         </div>
 
         <h1>
-            Thank You For Your
-            <span>5-Star Rating ⭐</span>
+            🌟 Thank You!
         </h1>
 
-        <p>
-            Your feedback helps other patients discover trusted
-            healthcare services in Wardha.
-        </p>
+        <p class="hero-subtitle">
 
+            What impressed you most
+            about your visit? Your feedback helps other patients discover trusted
+            healthcare services in Wardha.
+
+        </p>
     </section>
     <div class="wrap">
         <h1>AAS Hospital & Pathology</h1>
         <p>Select 2-5 strengths.</p>
         <div class="grid" id="opts"></div>
-        <button class="primary" onclick="generateReview()">Generate Review</button>
+        <div class="generate-wrap">
+
+            <button class="primary" onclick="generateReview()">
+                Generate Review
+            </button>
+
+        </div>
         <div id="box" style="display:none">
 
-
+            <h2 class="preview-title">
+                Your Review Preview
+            </h2>
             <textarea id="review"></textarea>
 
             <div class="trust-box">
@@ -335,9 +556,72 @@
             </button>
 
         </div>
-        <h2 class="preview-title">
-            Your Review Preview
-        </h2>
+
+    </div>
+    <div id="copyModal" class="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-icon">
+                ✅
+            </div>
+
+            <h2>Review Copied Successfully!</h2>
+
+            <p>
+                Your review has been copied to your clipboard.
+            </p>
+
+            <div class="steps">
+
+                <div style="font-size:18px;font-weight:700;margin-bottom:12px;color:#EA1B23;">
+                    ⚠️ IMPORTANT
+                </div>
+
+                <div>
+                    When Google opens:
+                </div>
+
+                <br>
+
+                <div>
+                    1️⃣ Tap inside the review text box
+                </div>
+
+                <div>
+                    2️⃣ Press and hold
+                </div>
+
+                <div>
+                    3️⃣ Tap <b>PASTE</b>
+                </div>
+
+                <div>
+                    4️⃣ Tap <b>POST REVIEW</b>
+                </div>
+
+                <br>
+
+                <div style="
+                background:white;
+                padding:12px;
+                border-radius:10px;
+                text-align:center;
+                font-weight:700;
+                color:#005A63;
+            ">
+                    📋 Your review is already copied.<br>
+                    You only need to paste it.
+                </div>
+
+            </div>
+
+            <button id="continueBtn">
+                📋 Review Copied • Open Google Review
+            </button>
+
+        </div>
+
     </div>
     <script>
         const options = [
@@ -1388,6 +1672,11 @@
             last = r;
             document.getElementById('review').value = r;
             document.getElementById('box').style.display = 'block';
+            document.getElementById('box')
+                .scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
         }
         const SCRIPT_URL =
             "https://script.google.com/macros/s/AKfycbw-pCWG_45x8cWkx8oozGAeazeR7XUrsbS3KBF6SH5gDqxovxMiSpSa5wuFrv0-ZQ4e/exec";
@@ -1397,29 +1686,34 @@
             const review =
                 document.getElementById("review").value;
 
-            try {
+            // Copy immediately
+            await navigator.clipboard.writeText(review);
 
-                await fetch(SCRIPT_URL, {
-                    method: "POST",
-                    body: JSON.stringify({
-                        rating: "5",
-                        generatedReview: review
-                    })
-                });
+            // Save analytics in background
+            fetch(SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify({
+                    rating: "5",
+                    generatedReview: review
+                })
+            }).catch(() => { });
 
-            } catch (error) { }
-
-            try {
-                await navigator.clipboard.writeText(review);
-            } catch (error) { }
-
-            window.open(
-                "https://g.page/r/CQzdArpE6pQyEBM/review",
-                "_blank"
-            );
+            // Show popup instantly
+            document.getElementById(
+                "copyModal"
+            ).style.display = "flex";
 
         }
+        document.getElementById(
+            "continueBtn"
+        ).onclick = function () {
+
+            window.location.href =
+                "https://search.google.com/local/writereview?placeid=ChIJO53K1TZ_1DsRDN0CukTqlDI&source=g.page.m.ia._&laa=nmx-review-solicitation-ia2";
+
+        };
     </script>
+
 </body>
 
 </html>
