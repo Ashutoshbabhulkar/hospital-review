@@ -32,6 +32,14 @@
             padding: 20px;
         }
 
+        .hero-logo img {
+
+            width: 80px;
+
+            height: auto;
+
+        }
+
         .container {
             max-width: 1000px;
             margin: auto;
@@ -61,6 +69,30 @@
         .header p {
             color: #666;
             margin-top: 8px;
+        }
+
+        .rating-banner {
+            background: #FFF4E5;
+            color: #B45309;
+            padding: 14px;
+            border-radius: 14px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .option-card {
+            padding: 18px;
+            border-radius: 18px;
+            border: 2px solid #E5E7EB;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .option-card.selected {
+            background: #FFEAEA;
+            border-color: #EA1B23;
         }
 
         .card {
@@ -199,6 +231,12 @@
             line-height: 1.7;
         }
 
+        .submit-wrap {
+            position: sticky;
+            bottom: 10px;
+            z-index: 100;
+        }
+
         .footer-note {
             text-align: center;
             margin-top: 20px;
@@ -234,8 +272,8 @@
 
         <div class="header">
 
-            <div class="logo">
-                आस<span>+</span>
+            <div class="hero-logo">
+                <img src="Aas Logo.png" alt="AAS Logo">
             </div>
 
             <h1>AAS Hospital & Pathology</h1>
@@ -243,20 +281,22 @@
             <p>Your feedback helps us improve patient care.</p>
 
         </div>
+        <div class="rating-banner" id="ratingBanner"></div>
 
         <div class="card" id="feedbackForm">
 
             <h2 class="card-title">Help Us Improve</h2>
 
             <p class="subtitle">
-                Please tell us what could have been better during your visit.
-            </p>
+                We value your feedback.
+
+                What could we improve to make your experience better? </p>
 
             <div class="options">
 
                 <label class="option">
                     <input type="checkbox" value="Waiting Time">
-                    <span>Waiting Time</span>
+                    ⏱️ Waiting Time
                 </label>
 
                 <label class="option">
@@ -322,7 +362,10 @@
                         <input type="checkbox" id="followup">
 
                         <span>
-                            📞 Please contact me to discuss my experience
+                            📞 Request a Call Back.
+
+                            Our team will contact you personally
+                            to understand and resolve your concern.
                         </span>
 
                     </label>
@@ -331,9 +374,13 @@
 
             </div>
 
-            <button onclick="submitFeedback()">
-                Submit Feedback
-            </button>
+            <div class="submit-wrap">
+
+                <button onclick="submitFeedback()">
+                    Submit Feedback
+                </button>
+
+            </div>
 
         </div>
 
@@ -357,7 +404,18 @@
     </div>
 
     <script>
+        const rating = localStorage.getItem("rating");
 
+        const messages = {
+            "1": "😞 We're sorry your experience was not satisfactory.",
+            "2": "😕 We appreciate your feedback and want to improve.",
+            "3": "🙂 Thank you. Tell us how we can do better.",
+            "4": "😊 Thank you. What could have made your visit even better?"
+        };
+
+        document.getElementById(
+            "ratingBanner"
+        ).innerHTML = messages[rating];
         const SCRIPT_URL =
             "https://script.google.com/macros/s/AKfycbw-pCWG_45x8cWkx8oozGAeazeR7XUrsbS3KBF6SH5gDqxovxMiSpSa5wuFrv0-ZQ4e/exec";
 
